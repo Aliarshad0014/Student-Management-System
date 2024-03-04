@@ -1,16 +1,15 @@
-const Campus = require("../schemas/campus-schema");
+const Campus = require("../models/campus-model");
 
 const campus = async (req, res) => {
     try {
         const { id, name, location, contact_number, manager } = req.body;
 
-        // Check if the ID already exists
-        const existingCampus = Campus.findOne({ id });
+        // Check if thes ID already exists
+        const existingCampus = await Campus.findOne({ id });
 
         if (existingCampus) {
-            console.log('User with the given ID already exists');
-            res.status(400).send('User with the given ID already exists');
-            return;  // Stop execution if the user exists
+            return res.status(400).send('User with the given ID already exists');
+             // Stop execution if the user exists
         }
 
         // If the user does not exist, create a new document

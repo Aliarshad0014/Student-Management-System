@@ -1,21 +1,30 @@
-const express = require("express")
+const express = require("express");
 const app = express();
-const router = require("./routers/campus-router")
-const connectDb = require("./utils/db")
+const campusRouter = require("./routers/campus-router");
+const courseRouter = require("./routers/course-router"); 
+const departmentRouter = require("./routers/department-router"); 
+const documentRouter = require("./routers/document-router");
+const programRouter = require("./routers/program-router"); 
+const staffRouter = require("./routers/staff-router"); 
+const studentRouter = require("./routers/student-router"); 
 
-app.use(express.json())
+const connectDb = require("./utils/db");
 
-app.use("/api/campus", router)
+app.use(express.json());
 
-// app.get("/", (req,res) =>{
-//     res.status(200).send("welcome gudsfgeays")
-
-// });
+// Use the campus router for paths starting with "/api/campus"
+app.use("/api/campus", campusRouter);
+app.use("/api/course", courseRouter);
+app.use("/api/department", departmentRouter);
+app.use("/api/document", documentRouter);
+app.use("/api/program", programRouter);
+app.use("/api/staff", staffRouter);
+app.use("/api/student", studentRouter);
 
 const PORT = 5000;
-connectDb().then(()=>{
+
+connectDb().then(() => {
     app.listen(PORT, () => {
         console.log(`Server running at: http://localhost:${PORT}`);
-    })
-    
-})
+    });
+});

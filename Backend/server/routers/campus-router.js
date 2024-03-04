@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const campus = require("../controllers/campus-controller")
+const campusController = require("../controllers/campus-controller")
 
-router.route("/").post(campus);
+router.route("/").post(campusController);
 
 module.exports = router;
