@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const campusSchema = new mongoose.Schema({
-    id: { type: String, required: true },
+    id: { type: Number, required: true },
     name: { type: String, required: true },
     location: { type: String, required: true },
     contact_number: { type: String, required: true },
