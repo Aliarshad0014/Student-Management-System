@@ -12,7 +12,7 @@ const connectDb = require("./utils/db");
 
 app.use(express.json());
 
-// Use the campus router for paths starting with "/api/campus"
+//  router paths starting with "/api/xroute"
 app.use("/api/campus", campusRouter);
 app.use("/api/course", courseRouter);
 app.use("/api/department", departmentRouter);
