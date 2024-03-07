@@ -11,7 +11,6 @@ const staff = async (req, res) => {
 
         if (!existingCampus) {
             return res.status(400).send('Campus with the given ID does not exist');
-            // Stop execution if the campus does not exist
         }
 
         // Check if the department with the given ID exists
@@ -19,7 +18,13 @@ const staff = async (req, res) => {
 
         if (!existingDepartment) {
             return res.status(400).send('Department with the given ID does not exist');
-            // Stop execution if the department does not exist
+        }
+
+        // Check if the email already exists
+        const existingEmail = await Staff.findOne({ email });
+
+        if (existingEmail) {
+            return res.status(400).send('Staff with the given email already exists');
         }
 
         // Check if the ID already exists
@@ -27,7 +32,6 @@ const staff = async (req, res) => {
 
         if (existingStaff) {
             return res.status(400).send('Staff with the given ID already exists');
-            // Stop execution if the staff exists
         }
 
         // If the campus, department, and staff do not exist, create a new staff
@@ -40,4 +44,40 @@ const staff = async (req, res) => {
     }
 };
 
-module.exports = staff;
+const staffHandleGet = async (req, res) => {
+    try {
+        // Implement logic to retrieve data for GET requests
+        const staffMembers = await Staff.find();
+        res.status(200).json(staffMembers);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
+const staffHandleDelete = async (req, res) => {
+    try {
+        const { id } = req.body;
+
+        // Check if the staff member exists
+        const existingStaff = await Staff.findOne({ id });
+
+        if (!existingStaff) {
+            return res.status(404).send('Staff member with the given ID not found');
+        }
+
+        // If the staff member exists, delete it
+        await Staff.deleteOne({ id });
+
+        res.status(200).send(`Staff member with ID ${id} has been deleted`);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
+module.exports = {
+    staff,
+    staffHandleGet,
+    staffHandleDelete,
+};
