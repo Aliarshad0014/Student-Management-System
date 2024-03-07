@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const documentController = require("../controllers/document-controller");
 
-router.route("/").post(documentController);
+router.route("/").post(documentController.document);
+router.route("/").get(documentController.documentHandleGet);
+router.route("/").delete(documentController.documentHandleDelete);
 
 module.exports = router;

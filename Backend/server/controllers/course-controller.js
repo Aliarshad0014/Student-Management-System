@@ -1,5 +1,5 @@
 const Course = require("../models/course-model");
-const Program = require("../models/program-model"); // Import the Program model
+const Program = require("../models/program-model");
 
 const course = async (req, res) => {
     try {
@@ -10,7 +10,6 @@ const course = async (req, res) => {
 
         if (!existingProgram) {
             return res.status(400).send('Program with the given Program ID does not exist');
-            // Stop execution if the program id matches 
         }
 
         // Check if the ID already exists
@@ -18,7 +17,6 @@ const course = async (req, res) => {
 
         if (existingCourse) {
             return res.status(400).send('Course with the given ID already exists');
-            // Stop execution if the course exists
         }
 
         // If the program and course do not exist, create a new document
@@ -31,4 +29,40 @@ const course = async (req, res) => {
     }
 };
 
-module.exports = course;
+const courseHandleGet = async (req, res) => {
+    try {
+        // Implement logic to retrieve data for GET requests
+        const courses = await Course.find();
+        res.status(200).json(courses);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
+const courseHandleDelete = async (req, res) => {
+    try {
+        const { id } = req.body;
+
+        // Check if the course exists
+        const existingCourse = await Course.findOne({ id });
+
+        if (!existingCourse) {
+            return res.status(404).send('Course with the given ID not found');
+        }
+
+        // If the course exists, delete it
+        await Course.deleteOne({ id });
+
+        res.status(200).send(`Course with ID ${id} has been deleted`);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
+module.exports = {
+    course,
+    courseHandleGet,
+    courseHandleDelete,
+};
