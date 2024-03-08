@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 // Defining the schema for the Student model
 const studentSchema = new mongoose.Schema({
-    id: { type: Number, required: true },
+    student_id: { type: Number, required: true },
     campus_id: { type: Number, required: true },
     program_id: { type: Number, required: true },
     department_id: { type: Number, required: true },

@@ -7,6 +7,7 @@ const documentRouter = require("./routers/document-router");
 const programRouter = require("./routers/program-router"); 
 const staffRouter = require("./routers/staff-router"); 
 const studentRouter = require("./routers/student-router"); 
+const studentInCourseRouter = require("./routers/studentInCourse-router"); 
 
 const connectDb = require("./utils/db");
 
@@ -20,6 +21,7 @@ app.use("/api/document", documentRouter);
 app.use("/api/program", programRouter);
 app.use("/api/staff", staffRouter);
 app.use("/api/student", studentRouter);
+app.use("/api/studentincourse", studentInCourseRouter);
 
 const PORT = 5000;
 

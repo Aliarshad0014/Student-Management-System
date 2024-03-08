@@ -2,17 +2,17 @@ const Document = require("../models/document-model");
 
 const document = async (req, res) => {
     try {
-        const { id, type, file_path } = req.body;
+        const { document_id, type, file_path } = req.body;
 
-        // Check if the ID already exists
-        const existingDocument = await Document.findOne({ id });
+        // Check if the document_id already exists
+        const existingDocument = await Document.findOne({ document_id });
 
         if (existingDocument) {
-            return res.status(400).send('Document with the given ID already exists');
+            return res.status(400).send('Document with the given document_id already exists');
         }
 
         // If the document does not exist, create a new document
-        await Document.create({ id, type, file_path });
+        await Document.create({ document_id, type, file_path });
 
         res.status(200).send(req.body);
     } catch (error) {
@@ -34,19 +34,19 @@ const documentHandleGet = async (req, res) => {
 
 const documentHandleDelete = async (req, res) => {
     try {
-        const { id } = req.body;
+        const { document_id } = req.body;
 
         // Check if the document exists
-        const existingDocument = await Document.findOne({ id });
+        const existingDocument = await Document.findOne({ document_id });
 
         if (!existingDocument) {
-            return res.status(404).send('Document with the given ID not found');
+            return res.status(404).send('Document with the given document_id not found');
         }
 
         // If the document exists, delete it
-        await Document.deleteOne({ id });
+        await Document.deleteOne({ document_id });
 
-        res.status(200).send(`Document with ID ${id} has been deleted`);
+        res.status(200).send(`Document with document_id ${document_id} has been deleted`);
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');

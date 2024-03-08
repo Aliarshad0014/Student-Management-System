@@ -3,24 +3,24 @@ const Department = require("../models/department-model");
 
 const program = async (req, res) => {
     try {
-        const { id, department_id, name, awarding_body } = req.body;
+        const { program_id, department_id, name, awarding_body } = req.body;
 
-        // Check if the department with the given ID exists
-        const existingDepartment = await Department.findOne({ id: department_id });
+        // Check if the department with the given department_id exists
+        const existingDepartment = await Department.findOne({ department_id: department_id });
 
         if (!existingDepartment) {
             return res.status(400).send('Department with the given ID does not exist');
         }
 
-        // Check if the ID already exists
-        const existingProgram = await Program.findOne({ id });
+        // Check if the program_id already exists
+        const existingProgram = await Program.findOne({ program_id });
 
         if (existingProgram) {
             return res.status(400).send('Program with the given ID already exists');
         }
 
         // If the department and program do not exist, create a new program
-        await Program.create({ id, department_id, name, awarding_body });
+        await Program.create({ program_id, department_id, name, awarding_body });
 
         res.status(200).send(req.body);
     } catch (error) {
@@ -42,19 +42,19 @@ const programHandleGet = async (req, res) => {
 
 const programHandleDelete = async (req, res) => {
     try {
-        const { id } = req.body;
+        const { program_id } = req.body;
 
         // Check if the program exists
-        const existingProgram = await Program.findOne({ id });
+        const existingProgram = await Program.findOne({ program_id });
 
         if (!existingProgram) {
             return res.status(404).send('Program with the given ID not found');
         }
 
         // If the program exists, delete it
-        await Program.deleteOne({ id });
+        await Program.deleteOne({ program_id });
 
-        res.status(200).send(`Program with ID ${id} has been deleted`);
+        res.status(200).send(`Program with ID ${program_id} has been deleted`);
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');

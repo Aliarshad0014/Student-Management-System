@@ -2,17 +2,17 @@ const Campus = require("../models/campus-model");
 
 const campusHandlePost = async (req, res) => {
     try {
-        const { id, name, location, contact_number, manager } = req.body;
+        const { campus_id, name, location, contact_number, manager } = req.body;
 
-        // Check if the ID already exists
-        const existingCampus = await Campus.findOne({ id });
+        // Check if the campus_id already exists
+        const existingCampus = await Campus.findOne({ campus_id });
 
         if (existingCampus) {
-            return res.status(400).send('Campus with the given ID already exists');
+            return res.status(400).send('Campus with the given campus_id already exists');
         }
 
         // If the campus does not exist, create a new document
-        await Campus.create({ id, name, location, contact_number, manager });
+        await Campus.create({ campus_id, name, location, contact_number, manager });
 
         res.status(200).send(req.body);
     } catch (error) {
@@ -34,19 +34,19 @@ const campusHandleGet = async (req, res) => {
 
 const campusHandleDelete = async (req, res) => {
     try {
-        const {id} = req.body;
+        const {campus_id} = req.body;
 
         // Check if the campus exists
-        const existingCampus = await Campus.findOne({ id });
+        const existingCampus = await Campus.findOne({ campus_id });
 
         if (!existingCampus) {
-            return res.status(404).send('Campus with the given ID not found');
+            return res.status(404).send('Campus with the given campus_id not found');
         }
 
         // If the campus exists, delete it
-        await Campus.deleteOne({ id });
+        await Campus.deleteOne({ campus_id });
 
-        res.status(200).send(`Campus with ID ${id} has been deleted`);
+        res.status(200).send(`Campus with campus_id ${campus_id} has been deleted`);
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');
