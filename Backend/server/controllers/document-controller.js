@@ -21,11 +21,18 @@ const document = async (req, res) => {
     }
 };
 
-const documentHandleGet = async (req, res) => {
+const documentHandleGetById = async (req, res) => {
     try {
-        // Implement logic to retrieve data for GET requests
-        const documents = await Document.find();
-        res.status(200).json(documents);
+        const { document_id } = req.body;
+
+        // Check if the document with the given document_id exists
+        const existingDocument = await Document.findOne({ document_id });
+
+        if (!existingDocument) {
+            return res.status(404).send('Document Id not found');
+        }
+
+        res.status(200).json(existingDocument);
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');
@@ -53,8 +60,31 @@ const documentHandleDelete = async (req, res) => {
     }
 };
 
+const documentHandleUpdate = async (req, res) => {
+    try {
+        const { document_id } = req.body;
+
+        // Find and update document by document_id
+        const updatedDocument = await Document.findOneAndUpdate(
+            { document_id },
+            req.body,
+            { new: true }
+        );
+
+        if (!updatedDocument) {
+            return res.status(404).send('Document with the given document_id not found');
+        }
+
+        res.status(200).json(updatedDocument);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
 module.exports = {
     document,
-    documentHandleGet,
+    documentHandleGetById,
     documentHandleDelete,
+    documentHandleUpdate
 };

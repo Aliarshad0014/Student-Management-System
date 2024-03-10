@@ -44,11 +44,18 @@ const staff = async (req, res) => {
     }
 };
 
-const staffHandleGet = async (req, res) => {
+const staffHandleGetById = async (req, res) => {
     try {
-        // Implement logic to retrieve data for GET requests
-        const staffMembers = await Staff.find();
-        res.status(200).json(staffMembers);
+        const { staff_id } = req.body;
+
+        // Check if the staff member with the given staff_id exists
+        const existingStaff = await Staff.findOne({ staff_id });
+
+        if (!existingStaff) {
+            return res.status(404).send('Staff Id not found');
+        }
+
+        res.status(200).json(existingStaff);
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');
@@ -76,8 +83,49 @@ const staffHandleDelete = async (req, res) => {
     }
 };
 
+
+const staffHandleUpdate = async (req, res) => {
+    try {
+        const { staff_id, campus_id, department_id } = req.body;
+
+        // Check if the staff with the given ID exists
+        const existingStaff = await Staff.findOne({ staff_id });
+
+        if (!existingStaff) {
+            return res.status(404).send('Staff member with the given staff_id not found');
+        }
+
+        // Check if the campus with the given ID exists
+        const existingCampus = await Campus.findOne({ campus_id });
+
+        if (!existingCampus) {
+            return res.status(400).send('Campus with the given ID does not exist');
+        }
+
+        // Check if the department with the given ID exists
+        const existingDepartment = await Department.findOne({ department_id });
+
+        if (!existingDepartment) {
+            return res.status(400).send('Department with the given ID does not exist');
+        }
+
+        // Update staff member with the provided data
+        const updatedStaff = await Staff.findOneAndUpdate(
+            { staff_id },
+            req.body,
+            { new: true }
+        );
+
+        res.status(200).json(updatedStaff);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
 module.exports = {
     staff,
-    staffHandleGet,
+    staffHandleGetById,
     staffHandleDelete,
+    staffHandleUpdate
 };

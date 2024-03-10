@@ -21,11 +21,18 @@ const department = async (req, res) => {
     }
 };
 
-const departmentHandleGet = async (req, res) => {
+const departmentHandleGetById = async (req, res) => {
     try {
-        // Implement logic to retrieve data for GET requests
-        const departments = await Department.find();
-        res.status(200).json(departments);
+        const { department_id } = req.body;
+
+        // Check if the department with the given department_id exists
+        const existingDepartment = await Department.findOne({ department_id });
+
+        if (!existingDepartment) {
+            return res.status(404).send('Department Id not found');
+        }
+
+        res.status(200).json(existingDepartment);
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');
@@ -53,8 +60,31 @@ const departmentHandleDelete = async (req, res) => {
     }
 };
 
+const departmentHandleUpdate = async (req, res) => {
+    try {
+        const { department_id } = req.body;
+
+        // Find and update department by department_id
+        const updatedDepartment = await Department.findOneAndUpdate(
+            { department_id },
+            req.body,
+            { new: true }
+        );
+
+        if (!updatedDepartment) {
+            return res.status(404).send('Department with the given department_id not found');
+        }
+
+        res.status(200).json(updatedDepartment);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
 module.exports = {
     department,
-    departmentHandleGet,
+    departmentHandleGetById,
     departmentHandleDelete,
+    departmentHandleUpdate
 };

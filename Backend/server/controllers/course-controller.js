@@ -29,11 +29,18 @@ const course = async (req, res) => {
     }
 };
 
-const courseHandleGet = async (req, res) => {
+const courseHandleGetById = async (req, res) => {
     try {
-        // Implement logic to retrieve data for GET requests
-        const courses = await Course.find();
-        res.status(200).json(courses);
+        const { course_id } = req.body;
+
+        // Find course by course_id
+        const course = await Course.findOne({ course_id });
+
+        if (!course) {
+            return res.status(404).send('Course with the given course_id not found');
+        }
+
+        res.status(200).json(course);
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');
@@ -61,8 +68,38 @@ const courseHandleDelete = async (req, res) => {
     }
 };
 
+const courseHandleUpdate = async (req, res) => {
+    try {
+        const { course_id } = req.body;
+
+        // Find and update course by course_id
+        const updatedCourse = await Course.findOneAndUpdate(
+            { course_id },
+            req.body,
+            { new: true }
+        );
+
+        if (!updatedCourse) {
+            return res.status(404).send('Course with the given course_id not found');
+        }
+
+        // Check if the program with the given program_id exists
+        const existingProgram = await Program.findOne({ program_id: updatedCourse.program_id });
+
+        if (!existingProgram) {
+            return res.status(400).send('Program with the given Program ID does not exist');
+        }
+
+        res.status(200).json(updatedCourse);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
 module.exports = {
     course,
-    courseHandleGet,
+    courseHandleGetById,
     courseHandleDelete,
+    courseHandleUpdate,
 };

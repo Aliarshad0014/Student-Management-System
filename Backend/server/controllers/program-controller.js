@@ -29,11 +29,18 @@ const program = async (req, res) => {
     }
 };
 
-const programHandleGet = async (req, res) => {
+const programHandleGetById = async (req, res) => {
     try {
-        // Implement logic to retrieve data for GET requests
-        const programs = await Program.find();
-        res.status  (200).json(programs);
+        const { program_id } = req.body;
+
+        // Check if the program with the given program_id exists
+        const existingProgram = await Program.findOne({ program_id });
+
+        if (!existingProgram) {
+            return res.status(404).send('Program Id not found');
+        }
+
+        res.status(200).json(existingProgram);
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');
@@ -61,8 +68,41 @@ const programHandleDelete = async (req, res) => {
     }
 };
 
+const programHandleUpdate = async (req, res) => {
+    try {
+        const { program_id, department_id } = req.body;
+
+        // Check if the program with the given ID exists
+        const existingProgram = await Program.findOne({ program_id });
+
+        if (!existingProgram) {
+            return res.status(404).send('Program with the given program_id not found');
+        }
+
+        // Check if the department with the given ID exists
+        const existingDepartment = await Department.findOne({ department_id });
+
+        if (!existingDepartment) {
+            return res.status(400).send('Department with the given ID does not exist');
+        }
+
+        // Update program with the provided data
+        const updatedProgram = await Program.findOneAndUpdate(
+            { program_id },
+            req.body,
+            { new: true }
+        );
+
+        res.status(200).json(updatedProgram);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
 module.exports = {
     program,
-    programHandleGet,
+    programHandleGetById,
     programHandleDelete,
+    programHandleUpdate
 };

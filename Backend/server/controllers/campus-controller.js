@@ -1,6 +1,6 @@
 const Campus = require("../models/campus-model");
 
-const campusHandlePost = async (req, res) => {
+const campus= async (req, res) => {
     try {
         const { campus_id, name, location, contact_number, manager } = req.body;
 
@@ -21,11 +21,19 @@ const campusHandlePost = async (req, res) => {
     }
 };
 
-const campusHandleGet = async (req, res) => {
+
+const campusHandleGetById = async (req, res) => {
     try {
-        // Implement logic to retrieve data for GET requests
-        const campuses = await Campus.find();
-        res.status(200).json(campuses);
+        const { campus_id } = req.body;
+
+        // Find campus by campus_id
+        const campus = await Campus.findOne({ campus_id });
+
+        if (!campus) {
+            return res.status(404).send('Campus with the given campus_id not found');
+        }
+
+        res.status(200).json(campus);
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');
@@ -53,8 +61,31 @@ const campusHandleDelete = async (req, res) => {
     }
 };
 
+const campusHandleUpdate = async (req, res) => {
+    try {
+        const { campus_id } = req.body;
+
+        // Find and update campus by campus_id
+        const updatedCampus = await Campus.findOneAndUpdate(
+            { campus_id },
+            req.body,
+            { new: true }
+        );
+
+        if (!updatedCampus) {
+            return res.status(404).send('Campus with the given campus_id not found');
+        }
+
+        res.status(200).json(updatedCampus);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
 module.exports = {
-    campusHandlePost,
-    campusHandleGet,
+    campus,
+    campusHandleGetById,
     campusHandleDelete,
+    campusHandleUpdate,
 };
