@@ -52,6 +52,15 @@ const student = async (req, res) => {
     }
 };
 
+const getAllStudents = async (req, res) => {
+    try {
+        const students = await Student.find();
+        res.status(200).json(students);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+};
 
 const studentHandleGetById = async (req, res) => {
     try {
@@ -148,6 +157,7 @@ const studentHandleUpdate = async (req, res) => {
 
 module.exports = {
     student,
+    getAllStudents,
     studentHandleGetById,
     studentHandleDelete,
     studentHandleUpdate

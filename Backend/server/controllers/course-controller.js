@@ -29,6 +29,18 @@ const course = async (req, res) => {
     }
 };
 
+
+const getAllCourses = async (req, res) => {
+    try {
+        const courses = await Course.find();
+        res.status(200).json(courses);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
+
 const courseHandleGetById = async (req, res) => {
     try {
         const { course_id } = req.body;
@@ -99,6 +111,7 @@ const courseHandleUpdate = async (req, res) => {
 
 module.exports = {
     course,
+    getAllCourses,
     courseHandleGetById,
     courseHandleDelete,
     courseHandleUpdate,

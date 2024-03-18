@@ -1,16 +1,41 @@
 import React from 'react';
 
-const Login = () => {
+const Register = () => {
   return (
     <div className="relative flex h-screen">
       {/* Background image */}
       <img className='w-full h-full object-cover' src={'/static/images/loginbg.png'} alt="" />
-      {/* Right side with login form */}
+      {/* Blur effect */}
       <div className="absolute inset-0 flex items-center justify-center">
-        <img src="./static/images/Tmuc.png" className="mb-4 h-52" alt="Profile" />
+        <div className="absolute inset-0 bg-gray-900 opacity-70"></div>
+      </div>
+      {/* Registration form */}
+      <div className="absolute inset-0 flex items-center justify-center">
         <div className="p-8 max-w-md w-full bg-gray-100 rounded-md">
-          <h2 className="text-3xl font-semibold mb-4">Login</h2>
+          <h2 className="text-3xl font-semibold mb-4">Register</h2>
           <form>
+            <div className="mb-4">
+              <label htmlFor="firstName" className="block text-gray-700 text-sm font-bold mb-2">
+                First Name
+              </label>
+              <input
+                type="text"
+                id="firstName"
+                className="w-full p-2 border rounded-md"
+                placeholder="Enter your first name"
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="lastName" className="block text-gray-700 text-sm font-bold mb-2">
+                Last Name
+              </label>
+              <input
+                type="text"
+                id="lastName"
+                className="w-full p-2 border rounded-md"
+                placeholder="Enter your last name"
+              />
+            </div>
             <div className="mb-4">
               <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">
                 Email
@@ -37,20 +62,15 @@ const Login = () => {
               type="submit"
               className="w-full bg-purple-500 text-white p-2 rounded-md hover:bg-purple-400 transition duration-300 ease-in-out"
             >
-              Log In
+              Register
             </button>
+
           </form>
-          {/* "New user?" register now statement */}
-          <p className="text-gray-700 text-sm mt-4">
-            New user? <a href="/register" className="text-purple-500 hover:underline">Register now</a>
-          </p>
         </div>
       </div>
     </div>
   );
 };
 
-export default Login;
-
-
+export default Register;
 

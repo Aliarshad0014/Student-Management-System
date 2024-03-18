@@ -12,20 +12,20 @@ const StudentManagement = () => {
     { id: 6, name: 'Student 6' },
     { id: 7, name: 'Student 7' },
     { id: 8, name: 'Student 8' },
-    // { id: 9, name: 'Student 9' },
-    // { id: 10, name: 'Student 10' },
-    // { id: 11, name: 'Student 11' },
-    // { id: 12, name: 'Student 12' },
-    // { id: 13, name: 'Student 13' },
-    // { id: 14, name: 'Student 14' },
-    // { id: 15, name: 'Student 15' },
-    // { id: 16, name: 'Student 16' },
-    // { id: 17, name: 'Student 17' },
-    // { id: 18, name: 'Student 18' },
-    // { id: 19, name: 'Student 19' },
-    // { id: 20, name: 'Student 20' },
-    // { id: 21, name: 'Student 21' },
-    // { id: 22, name: 'Student 22' },
+    { id: 9, name: 'Student 9' },
+    { id: 10, name: 'Student 10' },
+    { id: 11, name: 'Student 11' },
+    { id: 12, name: 'Student 12' },
+    { id: 13, name: 'Student 13' },
+    { id: 14, name: 'Student 14' },
+    { id: 15, name: 'Student 15' },
+    { id: 16, name: 'Student 16' },
+    { id: 17, name: 'Student 17' },
+    { id: 18, name: 'Student 18' },
+    { id: 19, name: 'Student 19' },
+    { id: 20, name: 'Student 20' },
+    { id: 21, name: 'Student 21' },
+    { id: 22, name: 'Student 22' },
     // Add more students as needed
   ];
 
@@ -67,18 +67,20 @@ const StudentManagement = () => {
         </div>
 
         {/* List of Students */}
-        <ul className="divide-y divide-gray-200">
-          {filteredStudents.map((student) => (
-            <li key={student.id} className="py-3">
-              <a href={`/students/${student.id}`}>
-                <div>
-                  <h3 className="text-md font-semibold">{student.name}</h3>
-                  {/* Additional student details can be added here */}
-                </div>
-              </a>
-            </li>
-          ))}
-        </ul>
+        <div className="overflow-y-auto max-h-[500px]">
+          <ul className="divide-y divide-gray-200">
+            {filteredStudents.map((student) => (
+              <li key={student.id} className="py-3 text-left">
+                <a href={`/students/${student.id}`}>
+                  <div>
+                    <h3 className="text-md font-semibold hover:underline">{student.name}</h3>
+                    {/* Additional student details can be added here */}
+                  </div>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
       </main>
     </div>
   );

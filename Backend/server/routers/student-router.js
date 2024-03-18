@@ -3,6 +3,7 @@ const router = express.Router();
 const studentController = require("../controllers/student-controller");
 
 router.route("/").post(studentController.student);
+router.route("/all").get(studentController.getAllStudents);
 router.route("/").get(studentController.studentHandleGetById);
 router.route("/").delete(studentController.studentHandleDelete);
 router.route("/").put(studentController.studentHandleUpdate);

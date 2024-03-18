@@ -21,6 +21,16 @@ const department = async (req, res) => {
     }
 };
 
+const getAllDepartments = async (req, res) => {
+    try {
+        const departments = await Department.find();
+        res.status(200).json(departments);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
 const departmentHandleGetById = async (req, res) => {
     try {
         const { department_id } = req.body;
@@ -84,7 +94,9 @@ const departmentHandleUpdate = async (req, res) => {
 
 module.exports = {
     department,
+    getAllDepartments,
     departmentHandleGetById,
     departmentHandleDelete,
-    departmentHandleUpdate
+    departmentHandleUpdate,
 };
+

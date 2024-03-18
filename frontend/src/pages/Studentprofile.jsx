@@ -1,6 +1,5 @@
 import React from 'react';
 import Header from '../components/header'; // Assuming you have a Header component
-// import studentPhoto from './static/images/Tmuc.jpg'; // Sample student photo
 
 const StudentProfile = () => {
   // Sample student information
@@ -18,16 +17,16 @@ const StudentProfile = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col min-h-screen text-left">
       <header>
         <Header />
       </header>
 
-      <main className="p-4 mt-24 sm:mt-12 md:mt-16 lg:mt-20 xl:mt-24 lg:ml-32 lg:mr-32">
+      <main className="flex-grow p-4 mt-28 lg:ml-32 lg:mr-32">
         <h2 className="text-2xl font-bold mb-4">Student Profile</h2>
 
         {/* Student Information */}
-        <div className="flex flex-col md:flex-row md:space-x-8">
+        <div className="flex flex-col md:flex-row items-start space-y-4 md:space-y-0 md:space-x-8">
           {/* Student Photo */}
           <div className="w-48 h-48 bg-gray-200 rounded-full overflow-hidden">
             <img src={student.photo} alt="Student" className="w-full h-full object-cover" />
@@ -39,6 +38,9 @@ const StudentProfile = () => {
             <p className="mb-2">Contact Number: {student.contactNumber}</p>
             <p className="mb-2">Address: {student.address}</p>
 
+            {/* Horizontal Line */}
+            <hr className="my-4 border-t border-gray-300" />
+
             {/* Document List */}
             <div>
               <h4 className="text-lg font-semibold mb-2">Documents</h4>
@@ -48,6 +50,9 @@ const StudentProfile = () => {
                 ))}
               </ul>
             </div>
+
+            {/* Horizontal Line */}
+            <hr className="my-4 border-t border-gray-300" />
 
             {/* Fee Details */}
             <div>

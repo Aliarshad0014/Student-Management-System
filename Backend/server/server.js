@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 const campusRouter = require("./routers/campus-router");
 const courseRouter = require("./routers/course-router"); 
 const departmentRouter = require("./routers/department-router"); 
@@ -10,6 +11,14 @@ const studentRouter = require("./routers/student-router");
 const studentInCourseRouter = require("./routers/studentInCourse-router"); 
 
 const connectDb = require("./utils/db");
+
+const corsOptions ={
+    origin:"http://localhost:3000",
+    methods: "GET,POST,PUT,DELETE,PATCH,HEAD",
+    credentials: true,
+}
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
 

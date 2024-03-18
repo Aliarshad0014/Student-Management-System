@@ -21,6 +21,16 @@ const document = async (req, res) => {
     }
 };
 
+const getAllDocuments = async (req, res) => {
+    try {
+        const documents = await Document.find();
+        res.status(200).json(documents);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
 const documentHandleGetById = async (req, res) => {
     try {
         const { document_id } = req.body;
@@ -84,6 +94,7 @@ const documentHandleUpdate = async (req, res) => {
 
 module.exports = {
     document,
+    getAllDocuments,
     documentHandleGetById,
     documentHandleDelete,
     documentHandleUpdate

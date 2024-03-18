@@ -44,6 +44,16 @@ const staff = async (req, res) => {
     }
 };
 
+const getAllStaffMembers = async (req, res) => {
+    try {
+        const staffMembers = await Staff.find();
+        res.status(200).json(staffMembers);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
 const staffHandleGetById = async (req, res) => {
     try {
         const { staff_id } = req.body;
@@ -126,6 +136,7 @@ const staffHandleUpdate = async (req, res) => {
 module.exports = {
     staff,
     staffHandleGetById,
+    getAllStaffMembers,
     staffHandleDelete,
     staffHandleUpdate
 };

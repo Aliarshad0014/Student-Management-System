@@ -1,6 +1,5 @@
 import React from 'react';
 import Header from '../components/header';
-import Footer from '../components/footer';
 
 const Departments = () => {
   // Sample department data, replace with your actual data
@@ -21,7 +20,7 @@ const Departments = () => {
       {/* Main Content with margin-top to create space */}
       <main className="p-4 mt-24 sm:mt-12 md:mt-16 lg:mt-20 xl:mt-24 lg:ml-32 lg:mr-32"> {/* Adjust the mt value based on your header height */}
         {/* Departments Heading */}
-        <h2 className="text-2xl font-bold mb-4 mt-4 text-red-800">Departments</h2>
+        <h2 className="text-2xl font-bold mb-4 mt-4 text-red-800 text-left">Departments</h2>
 
         {/* Grid of Departments */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">

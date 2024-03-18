@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import Header from '../components/header';
-import Footer from '../components/footer';
 
 const Courses = () => {
   // Sample course data, replace with your actual data
@@ -9,6 +7,12 @@ const Courses = () => {
     { id: 2, name: 'Course B', description: 'Description for Course B' },
     { id: 3, name: 'Course C', description: 'Description for Course C' },
     { id: 4, name: 'Course D', description: 'Description for Course A' },
+    { id: 1, name: 'Course A', description: 'Description for Course A' },
+    { id: 2, name: 'Course B', description: 'Description for Course B' },
+    { id: 3, name: 'Course C', description: 'Description for Course C' },
+    { id: 1, name: 'Course A', description: 'Description for Course A' },
+    { id: 2, name: 'Course B', description: 'Description for Course B' },
+    { id: 3, name: 'Course C', description: 'Description for Course C' },
 
     // Add more courses as needed
   ];
@@ -29,10 +33,6 @@ const Courses = () => {
 
   return (
     <div className="flex flex-col h-screen">
-      <header>
-        {/* <Header /> */}
-      </header>
-
       <main className="p-4 mt-24 lg:ml-32 lg:mr-32 pb-16">
         {/* Courses Heading with Search Bar */}
         <div className="flex justify-between items-center mb-4">
@@ -48,20 +48,21 @@ const Courses = () => {
         </div>
 
         {/* List of Courses */}
-        <ul className="">
-          {filteredCourses.map((course) => (
-            <li
-              key={course.id}
-              className="p-4 mb-2 bg-white rounded-md cursor-pointer shadow-md"
-              onClick={() => handleClick(course)}
-            >
-              <h3 className="text-lg text-red-800 font-semibold mb-2">{course.name}</h3>
-              <p>{course.description}</p>
-            </li>
-          ))}
-        </ul>
+        <div className="overflow-y-auto max-h-[500px]">
+          <ul className="text-left">
+            {filteredCourses.map((course) => (
+              <li
+                key={course.id}
+                className="p-4 mb-2 bg-white rounded-md cursor-pointer shadow-md hover:bg-red-50 transition duration-300 ease-in-out"
+                onClick={() => handleClick(course)}
+              >
+                <h3 className="text-lg text-red-800 font-semibold mb-2">{course.name}</h3>
+                <p>{course.description}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
       </main>
-      {/* <Footer /> */}
     </div>
   );
 };

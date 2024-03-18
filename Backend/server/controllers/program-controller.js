@@ -29,6 +29,18 @@ const program = async (req, res) => {
     }
 };
 
+
+
+const getAllPrograms = async (req, res) => {
+    try {
+        const programs = await Program.find();
+        res.status(200).json(programs);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
 const programHandleGetById = async (req, res) => {
     try {
         const { program_id } = req.body;
@@ -102,6 +114,7 @@ const programHandleUpdate = async (req, res) => {
 
 module.exports = {
     program,
+    getAllPrograms,
     programHandleGetById,
     programHandleDelete,
     programHandleUpdate

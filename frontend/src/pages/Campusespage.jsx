@@ -21,7 +21,7 @@ const Campuses = () => {
       {/* Main Content with margin-top to create space */}
       <main className="p-4 mt-24 sm:mt-12 md:mt-16 lg:mt-20 xl:mt-24 lg:ml-32 lg:mr-32"> {/* Adjust the mt value based on your header height */}
         {/* Campuses Heading */}
-        <h2 className="text-2xl font-bold mb-4 mt-4 text-red-900">Choose Your Campus</h2>
+        <h2 className="text-2xl font-bold mb-4 mt-4 text-red-900 text-left">Campuses</h2>
 
         {/* Grid of Campuses */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">

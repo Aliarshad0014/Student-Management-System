@@ -21,6 +21,15 @@ const campus= async (req, res) => {
     }
 };
 
+const getAllCampuses = async (req, res) => {
+    try {
+        const campuses = await Campus.find();
+        res.status(200).json(campuses);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+};
 
 const campusHandleGetById = async (req, res) => {
     try {
@@ -86,6 +95,7 @@ const campusHandleUpdate = async (req, res) => {
 module.exports = {
     campus,
     campusHandleGetById,
+    getAllCampuses,
     campusHandleDelete,
     campusHandleUpdate,
 };
