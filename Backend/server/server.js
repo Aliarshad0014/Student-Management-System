@@ -9,6 +9,9 @@ const programRouter = require("./routers/program-router");
 const staffRouter = require("./routers/staff-router"); 
 const studentRouter = require("./routers/student-router"); 
 const studentInCourseRouter = require("./routers/studentInCourse-router"); 
+const feeRouter = require("./routers/fee-router"); 
+const salaryRouter = require("./routers/salary-router"); 
+
 
 const connectDb = require("./utils/db");
 
@@ -31,6 +34,9 @@ app.use("/api/program", programRouter);
 app.use("/api/staff", staffRouter);
 app.use("/api/student", studentRouter);
 app.use("/api/studentincourse", studentInCourseRouter);
+app.use("/api/fee", feeRouter);
+app.use("/api/salary", salaryRouter);
+
 
 const PORT = 5000;
 

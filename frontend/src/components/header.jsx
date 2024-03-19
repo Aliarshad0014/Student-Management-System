@@ -15,15 +15,12 @@ function Header() {
         >
             <div className="container mx-auto flex justify-around items-center">
                 <div>
-                    <img src={'./static/images/Tmuc.png'} alt="Tmuc Logo" className="w-full h-14" />
+                    <a href="/">
+                        <img src={'./static/images/Tmuc.png'} alt="Tmuc Logo" className="w-full h-14" />
+                    </a>
                 </div>
                 <nav className="hidden md:hidden lg:flex">
                     <ul className="flex space-x-10 text-black text-lg font-light">
-                    <li>
-                            <a href="/" className="hover:text-red-600 ease-in-out duration-300">
-                                Home
-                            </a>
-                        </li>
                         <li>
                             <a href="/Campuses" className="hover:text-red-600 ease-in-out duration-300">
                                 Campuses
@@ -55,3 +52,4 @@ function Header() {
 }
 
 export default Header;
+
