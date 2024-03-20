@@ -213,15 +213,15 @@ function App() {
             <Route path="/" element={<Landingpage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/campuses" element={<Campuses />} />
-            <Route path="/departments" element={<Departments />} />
-            <Route path="/programs" element={<Programs />} />
-            <Route path="/courses" element={<Courses />} />
-            <Route path="/student-management" element={<StudentManagement />} />
-            <Route path="/staff-management" element={<StaffManagement />} />
+            <Route path="/campuses" element={<Campuses campuses={campuses} />} />
+            <Route path="/departments" element={<Departments departments={departments} />} />
+            <Route path="/programs" element={<Programs programs={programs} />} />
+            <Route path="/courses" element={<Courses courses={courses} />} />
+            <Route path="/student-management" element={<StudentManagement students={students} />} />
+            <Route path="/staff-management" element={<StaffManagement staff={staff} />} />
             <Route path="/student-profile" element={<StudentProfile />} />
             <Route path="/staff-profile" element={<StaffProfile />} />
-            <Route path="/admin" element={<AdminPage />} />
+            <Route path="/admin" element={<AdminPage campuses={campuses} courses={courses} departments={departments} documents={documents} programs={programs} staff={staff} students={students} />} />
             <Route path="/update" element={<UpdatePage />} />
             <Route path="/add" element={<AddPage />} />
           </Routes>

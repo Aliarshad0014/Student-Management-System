@@ -6,7 +6,7 @@ const campusSchema = new mongoose.Schema({
     location: { type: String, required: true },
     contact_number: { type: String, required: true },
     manager: { type: String, required: true },
-
+    image: { type: String }, 
 });
 
 const Campus = new mongoose.model('Campus', campusSchema);

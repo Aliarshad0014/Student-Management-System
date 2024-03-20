@@ -1,21 +1,6 @@
 import React, { useState } from 'react';
 
-const Courses = () => {
-  // Sample course data, replace with your actual data
-  const courses = [
-    { id: 1, name: 'Course A', description: 'Description for Course A' },
-    { id: 2, name: 'Course B', description: 'Description for Course B' },
-    { id: 3, name: 'Course C', description: 'Description for Course C' },
-    { id: 4, name: 'Course D', description: 'Description for Course A' },
-    { id: 1, name: 'Course A', description: 'Description for Course A' },
-    { id: 2, name: 'Course B', description: 'Description for Course B' },
-    { id: 3, name: 'Course C', description: 'Description for Course C' },
-    { id: 1, name: 'Course A', description: 'Description for Course A' },
-    { id: 2, name: 'Course B', description: 'Description for Course B' },
-    { id: 3, name: 'Course C', description: 'Description for Course C' },
-
-    // Add more courses as needed
-  ];
+const Courses = ({ courses }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleSearch = (event) => {
@@ -25,11 +10,6 @@ const Courses = () => {
   const filteredCourses = courses.filter((course) =>
     course.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
-  const handleClick = (course) => {
-    // Handle click event, e.g., navigate to course details page
-    console.log('Clicked:', course);
-  };
 
   return (
     <div className="flex flex-col h-screen">
@@ -46,7 +26,7 @@ const Courses = () => {
             className="p-2 border border-gray-300 rounded-md w-48"
           />
         </div>
-
+        
         {/* List of Courses */}
         <div className="overflow-y-auto max-h-[500px]">
           <ul className="text-left">
@@ -54,9 +34,8 @@ const Courses = () => {
               <li
                 key={course.id}
                 className="p-4 mb-2 bg-white rounded-md cursor-pointer shadow-md hover:bg-red-50 transition duration-300 ease-in-out"
-                onClick={() => handleClick(course)}
               >
-                <h3 className="text-lg text-red-800 font-semibold mb-2">{course.name}</h3>
+                <h3 className="text-lg font-semibold mb-2">{course.name}</h3>
                 <p>{course.description}</p>
               </li>
             ))}
@@ -69,3 +48,7 @@ const Courses = () => {
 
 export default Courses;
 
+// Sample program data, replace with your actual data
+// color: '#ff7f0e' },
+// color: '#2ca02c' },
+// color: '#1f77b4' },

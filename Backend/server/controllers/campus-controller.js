@@ -2,7 +2,7 @@ const Campus = require("../models/campus-model");
 
 const campus= async (req, res) => {
     try {
-        const { campus_id, name, location, contact_number, manager } = req.body;
+        const { campus_id, name, location, contact_number, manager, image } = req.body;
 
         // Check if the campus_id already exists
         const existingCampus = await Campus.findOne({ campus_id });
@@ -10,9 +10,9 @@ const campus= async (req, res) => {
         if (existingCampus) {
             return res.status(400).send('Campus with the given campus_id already exists');
         }
-
+s
         // If the campus does not exist, create a new document
-        await Campus.create({ campus_id, name, location, contact_number, manager });
+        await Campus.create({ campus_id, name, location, contact_number, manager, image });
 
         res.status(200).send(req.body);
     } catch (error) {

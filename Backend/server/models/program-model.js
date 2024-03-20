@@ -5,6 +5,7 @@ const programSchema = new mongoose.Schema({
     department_id: { type: Number, required: true },
     name: { type: String, required: true },
     awarding_body: { type: String, required: true },
+    color: { type: String }
 
 });
 

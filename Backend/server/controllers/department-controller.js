@@ -2,7 +2,7 @@ const Department = require("../models/department-model");
 
 const department = async (req, res) => {
     try {
-        const { department_id, name, contact_number, head_of_department } = req.body;
+        const { department_id, name, contact_number, head_of_department, image } = req.body;
 
         // Check if the department_id already exists
         const existingDepartment = await Department.findOne({ department_id });
@@ -12,7 +12,7 @@ const department = async (req, res) => {
         }
 
         // If the department does not exist, create a new document
-        await Department.create({ department_id, name, contact_number, head_of_department });
+        await Department.create({ department_id, name, contact_number, head_of_department, image });
 
         res.status(200).send(req.body);
     } catch (error) {
