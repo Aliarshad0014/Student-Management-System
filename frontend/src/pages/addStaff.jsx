@@ -3,13 +3,14 @@ import React, { useState } from 'react';
 const AddStaff = () => {
     // Define initial state for input values
     const [inputValues, setInputValues] = useState({
-        staffId: '',
-        campusId: '',
-        departmentId: '',
+        staff_id: '',
+        campus_id: '',
+        program_id: '',
+        department_id: '',
         name: '',
-        designation: '',
         email: '',
-        contactNumber: ''
+        contact_number: '',
+        designation: '' // Add designation field
     });
 
     // Handle input change
@@ -19,10 +20,34 @@ const AddStaff = () => {
     };
 
     // Handle form submission
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Handle form submission logic here (e.g., sending data to backend)
-        console.log('Form submitted with data:', inputValues);
+        try {
+            const response = await fetch('http://localhost:5000/api/staff/post', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(inputValues)
+            });
+            if (!response.ok) {
+                throw new Error('Failed to add staff');
+            }
+            console.log('Staff added successfully!');
+            // Optionally, reset the form fields
+            setInputValues({
+                staff_id: '',
+                campus_id: '',
+                program_id: '',
+                department_id: '',
+                name: '',
+                email: '',
+                contact_number: '',
+                designation: '' // Reset designation field
+            });
+        } catch (error) {
+            console.error('Error adding staff:', error.message);
+        }
     };
 
     return (
@@ -33,18 +58,40 @@ const AddStaff = () => {
                     <label className="block text-gray-700">Staff ID</label>
                     <input
                         type="text"
-                        name="staffId"
-                        value={inputValues.staffId}
+                        name="staff_id"
+                        value={inputValues.staff_id}
+                        onChange={handleInputChange}
+                        className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    />
+                </div>
+                {/* Add Designation Field */}
+                <div className="mb-4">
+                    <label className="block text-gray-700">Designation</label>
+                    <input
+                        type="text"
+                        name="designation"
+                        value={inputValues.designation}
+                        onChange={handleInputChange}
+                        className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    />
+                </div>
+                {/* End of Designation Field */}
+                <div className="mb-4">
+                    <label className="block text-gray-700">Campus ID</label>
+                    <input
+                        type="text"
+                        name="campus_id"
+                        value={inputValues.campus_id}
                         onChange={handleInputChange}
                         className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     />
                 </div>
                 <div className="mb-4">
-                    <label className="block text-gray-700">Campus ID</label>
+                    <label className="block text-gray-700">Program ID</label>
                     <input
                         type="text"
-                        name="campusId"
-                        value={inputValues.campusId}
+                        name="program_id"
+                        value={inputValues.program_id}
                         onChange={handleInputChange}
                         className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     />
@@ -53,8 +100,8 @@ const AddStaff = () => {
                     <label className="block text-gray-700">Department ID</label>
                     <input
                         type="text"
-                        name="departmentId"
-                        value={inputValues.departmentId}
+                        name="department_id"
+                        value={inputValues.department_id}
                         onChange={handleInputChange}
                         className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     />
@@ -65,16 +112,6 @@ const AddStaff = () => {
                         type="text"
                         name="name"
                         value={inputValues.name}
-                        onChange={handleInputChange}
-                        className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                    />
-                </div>
-                <div className="mb-4">
-                    <label className="block text-gray-700">Designation</label>
-                    <input
-                        type="text"
-                        name="designation"
-                        value={inputValues.designation}
                         onChange={handleInputChange}
                         className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     />
@@ -93,8 +130,8 @@ const AddStaff = () => {
                     <label className="block text-gray-700">Contact Number</label>
                     <input
                         type="text"
-                        name="contactNumber"
-                        value={inputValues.contactNumber}
+                        name="contact_number"
+                        value={inputValues.contact_number}
                         onChange={handleInputChange}
                         className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     />

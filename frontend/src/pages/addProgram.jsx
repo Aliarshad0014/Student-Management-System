@@ -3,10 +3,10 @@ import React, { useState } from 'react';
 const AddPrograms = () => {
     // Define initial state for input values
     const [inputValues, setInputValues] = useState({
-        programId: '',
-        departmentId: '',
+        program_id: '',
+        department_id: '',
         name: '',
-        awardingBody: ''
+        awarding_body: ''
     });
 
     // Handle input change
@@ -16,10 +16,30 @@ const AddPrograms = () => {
     };
 
     // Handle form submission
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Handle form submission logic here (e.g., sending data to backend)
-        console.log('Form submitted with data:', inputValues);
+        try {
+            const response = await fetch('http://localhost:5000/api/program/post', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(inputValues)
+            });
+            if (!response.ok) {
+                throw new Error('Failed to add program');
+            }
+            console.log('Program added successfully!');
+            // Optionally, reset the form fields
+            setInputValues({
+                program_id: '',
+                department_id: '',
+                name: '',
+                awarding_body: ''
+            });
+        } catch (error) {
+            console.error('Error adding program:', error.message);
+        }
     };
 
     return (
@@ -30,8 +50,8 @@ const AddPrograms = () => {
                     <label className="block text-gray-700">Program ID</label>
                     <input
                         type="text"
-                        name="programId"
-                        value={inputValues.programId}
+                        name="program_id"
+                        value={inputValues.program_id}
                         onChange={handleInputChange}
                         className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     />
@@ -40,8 +60,8 @@ const AddPrograms = () => {
                     <label className="block text-gray-700">Department ID</label>
                     <input
                         type="text"
-                        name="departmentId"
-                        value={inputValues.departmentId}
+                        name="department_id"
+                        value={inputValues.department_id}
                         onChange={handleInputChange}
                         className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     />
@@ -60,8 +80,8 @@ const AddPrograms = () => {
                     <label className="block text-gray-700">Awarding Body</label>
                     <input
                         type="text"
-                        name="awardingBody"
-                        value={inputValues.awardingBody}
+                        name="awarding_body"
+                        value={inputValues.awarding_body}
                         onChange={handleInputChange}
                         className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     />

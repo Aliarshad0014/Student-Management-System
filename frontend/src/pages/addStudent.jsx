@@ -3,13 +3,13 @@ import React, { useState } from 'react';
 const AddStudent = () => {
     // Define initial state for input values
     const [inputValues, setInputValues] = useState({
-        studentId: '',
-        campusId: '',
-        programId: '',
-        departmentId: '',
+        student_id: '',
+        campus_id: '',
+        program_id: '',
+        department_id: '',
         name: '',
         email: '',
-        contactNumber: ''
+        contact_number: ''
     });
 
     // Handle input change
@@ -19,10 +19,33 @@ const AddStudent = () => {
     };
 
     // Handle form submission
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Handle form submission logic here (e.g., sending data to backend)
-        console.log('Form submitted with data:', inputValues);
+        try {
+            const response = await fetch('http://localhost:5000/api/student/post', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(inputValues)
+            });
+            if (!response.ok) {
+                throw new Error('Failed to add student');
+            }
+            console.log('Student added successfully!');
+            // Optionally, reset the form fields
+            setInputValues({
+                student_id: '',
+                campus_id: '',
+                program_id: '',
+                department_id: '',
+                name: '',
+                email: '',
+                contact_number: ''
+            });
+        } catch (error) {
+            console.error('Error adding student:', error.message);
+        }
     };
 
     return (
@@ -33,8 +56,8 @@ const AddStudent = () => {
                     <label className="block text-gray-700">Student ID</label>
                     <input
                         type="text"
-                        name="studentId"
-                        value={inputValues.studentId}
+                        name="student_id"
+                        value={inputValues.student_id}
                         onChange={handleInputChange}
                         className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     />
@@ -43,8 +66,8 @@ const AddStudent = () => {
                     <label className="block text-gray-700">Campus ID</label>
                     <input
                         type="text"
-                        name="campusId"
-                        value={inputValues.campusId}
+                        name="campus_id"
+                        value={inputValues.campus_id}
                         onChange={handleInputChange}
                         className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     />
@@ -53,8 +76,8 @@ const AddStudent = () => {
                     <label className="block text-gray-700">Program ID</label>
                     <input
                         type="text"
-                        name="programId"
-                        value={inputValues.programId}
+                        name="program_id"
+                        value={inputValues.program_id}
                         onChange={handleInputChange}
                         className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     />
@@ -63,8 +86,8 @@ const AddStudent = () => {
                     <label className="block text-gray-700">Department ID</label>
                     <input
                         type="text"
-                        name="departmentId"
-                        value={inputValues.departmentId}
+                        name="department_id"
+                        value={inputValues.department_id}
                         onChange={handleInputChange}
                         className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     />
@@ -93,8 +116,8 @@ const AddStudent = () => {
                     <label className="block text-gray-700">Contact Number</label>
                     <input
                         type="text"
-                        name="contactNumber"
-                        value={inputValues.contactNumber}
+                        name="contact_number"
+                        value={inputValues.contact_number}
                         onChange={handleInputChange}
                         className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     />

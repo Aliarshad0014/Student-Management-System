@@ -3,11 +3,11 @@ import React, { useState } from 'react';
 const AddFee = () => {
     // Define initial state for input values
     const [inputValues, setInputValues] = useState({
-        feeId: '',
-        studentId: '',
+        fee_id: '',
+        student_id: '',
         amount: '',
         month: '',
-        dueDate: '',
+        due_date: '',
         paid: ''
     });
 
@@ -18,10 +18,32 @@ const AddFee = () => {
     };
 
     // Handle form submission
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Handle form submission logic here (e.g., sending data to backend)
-        console.log('Form submitted with data:', inputValues);
+        try {
+            const response = await fetch('http://localhost:5000/api/fee/post', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(inputValues)
+            });
+            if (!response.ok) {
+                throw new Error('Failed to add fee');
+            }
+            console.log('Fee added successfully!');
+            // Optionally, reset the form fields
+            setInputValues({
+                fee_id: '',
+                student_id: '',
+                amount: '',
+                month: '',
+                due_date: '',
+                paid: ''
+            });
+        } catch (error) {
+            console.error('Error adding fee:', error.message);
+        }
     };
 
     return (
@@ -32,8 +54,8 @@ const AddFee = () => {
                     <label className="block text-gray-700">Fee ID</label>
                     <input
                         type="text"
-                        name="feeId"
-                        value={inputValues.feeId}
+                        name="fee_id"
+                        value={inputValues.fee_id}
                         onChange={handleInputChange}
                         className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     />
@@ -42,8 +64,8 @@ const AddFee = () => {
                     <label className="block text-gray-700">Student ID</label>
                     <input
                         type="text"
-                        name="studentId"
-                        value={inputValues.studentId}
+                        name="student_id"
+                        value={inputValues.student_id}
                         onChange={handleInputChange}
                         className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     />
@@ -72,8 +94,8 @@ const AddFee = () => {
                     <label className="block text-gray-700">Due Date</label>
                     <input
                         type="text"
-                        name="dueDate"
-                        value={inputValues.dueDate}
+                        name="due_date"
+                        value={inputValues.due_date}
                         onChange={handleInputChange}
                         className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     />
@@ -102,3 +124,4 @@ const AddFee = () => {
 };
 
 export default AddFee;
+

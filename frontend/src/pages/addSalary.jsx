@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 const AddSalary = () => {
     // Define initial state for input values
     const [inputValues, setInputValues] = useState({
-        salaryId: '',
-        staffId: '',
+        salary_id: '',
+        staff_id: '',
         amount: '',
         month: '',
         paid: ''
@@ -17,10 +17,31 @@ const AddSalary = () => {
     };
 
     // Handle form submission
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Handle form submission logic here (e.g., sending data to backend)
-        console.log('Form submitted with data:', inputValues);
+        try {
+            const response = await fetch('http://localhost:5000/api/salary/post', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(inputValues)
+            });
+            if (!response.ok) {
+                throw new Error('Failed to add salary');
+            }
+            console.log('Salary added successfully!');
+            // Optionally, reset the form fields
+            setInputValues({
+                salary_id: '',
+                staff_id: '',
+                amount: '',
+                month: '',
+                paid: ''
+            });
+        } catch (error) {
+            console.error('Error adding salary:', error.message);
+        }
     };
 
     return (
@@ -31,8 +52,8 @@ const AddSalary = () => {
                     <label className="block text-gray-700">Salary ID</label>
                     <input
                         type="text"
-                        name="salaryId"
-                        value={inputValues.salaryId}
+                        name="salary_id"
+                        value={inputValues.salary_id}
                         onChange={handleInputChange}
                         className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     />
@@ -41,8 +62,8 @@ const AddSalary = () => {
                     <label className="block text-gray-700">Staff ID</label>
                     <input
                         type="text"
-                        name="staffId"
-                        value={inputValues.staffId}
+                        name="staff_id"
+                        value={inputValues.staff_id}
                         onChange={handleInputChange}
                         className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     />
@@ -91,3 +112,4 @@ const AddSalary = () => {
 };
 
 export default AddSalary;
+
