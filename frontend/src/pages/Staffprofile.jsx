@@ -1,28 +1,61 @@
-import React from 'react';
-import Header from '../components/header'; // Assuming you have a Header component
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
-const StaffProfile = () => {
-  // Sample staff information
-  const staff = {
-    name: 'John Doe',
-    photo: './static/images/Tmuc.png',
-    contactNumber: '123-456-7890',
-    address: '123 Main Street, City, Country',
-    documents: ['Document 1', 'Document 2', 'Document 3'],
-    salaryDetails: [
-      { month: 'January', amount: '$2000', isPaid: true },
-      { month: 'February', amount: '$2000', isPaid: false },
-      // Add more salary details as needed
-    ]
-  };
+const StaffProfile = ({salary, documents }) => {
+  const [staff, setStaffData] = useState([]);
+  const [salaries, setSalary] = useState([]);
+
+  const { id } = useParams(); // Get the ID from the URL params
+
+  useEffect(() => {
+    const fetchStaffData = async () => {
+      try {
+        const response = await fetch(`http://localhost:5000/api/staff/${id}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        if (!response.ok) {
+          throw new Error('Failed to fetch staff data');
+        }
+        const data = await response.json();
+        setStaffData(data);
+      } catch (error) {
+        console.error('Error fetching staff data:', error.message);
+      }
+    };
+    fetchStaffData();
+  }, [id]);
+
+  useEffect(() => {
+    const fetchStaffData = async () => {
+      try {
+        const response = await fetch(`http://localhost:5000/api/salary/${id}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        if (!response.ok) {
+          throw new Error('Failed to fetch staff data');
+        }
+        const data = await response.json();
+        console.log(data)
+        setSalary(data);
+      } catch (error) {
+        console.error('Error fetching staff data:', error.message);
+      }
+    };
+    fetchStaffData();
+  }, [id]);
+
+  
 
   return (
     <div className="flex flex-col min-h-screen text-left">
-      <header>
-        <Header />
-      </header>
 
-      <main className="flex-grow p-4 mt-28 lg:ml-32 lg:mr-32">
+      <main className="flex-grow p-4 lg:ml-32 lg:mr-32">
         <h2 className="text-2xl font-bold mb-4">Staff Profile</h2>
 
         {/* Staff Information */}
@@ -35,8 +68,8 @@ const StaffProfile = () => {
           {/* Staff Details */}
           <div className="flex-1">
             <h3 className="text-xl font-semibold mb-2">{staff.name}</h3>
-            <p className="mb-2">Contact Number: {staff.contactNumber}</p>
-            <p className="mb-2">Address: {staff.address}</p>
+            <p className="mb-2">Contact Number: {staff.contact_number}</p>
+            <p className="mb-2">Email: {staff.email}</p>
 
             {/* Horizontal Line */}
             <hr className="my-4 border-t border-gray-300" />
@@ -45,8 +78,8 @@ const StaffProfile = () => {
             <div>
               <h4 className="text-lg font-semibold mb-2">Documents</h4>
               <ul>
-                {staff.documents.map((document, index) => (
-                  <li key={index}>{document}</li>
+                {documents.map((document, index) => (
+                  <li key={index}>{document.type}</li>
                 ))}
               </ul>
             </div>
@@ -58,9 +91,9 @@ const StaffProfile = () => {
             <div>
               <h4 className="text-lg font-semibold mb-2">Salary Details</h4>
               <ul>
-                {staff.salaryDetails.map((salary, index) => (
+                {salaries.map((salary, index) => (
                   <li key={index}>
-                    <p>{salary.month} - {salary.amount} {salary.isPaid ? '(Paid)' : '(Not Paid)'}</p>
+                    <p>{salary.month} - {salary.amount} {salary.paid ? '(Paid)' : '(Not Paid)'}</p>
                   </li>
                 ))}
               </ul>

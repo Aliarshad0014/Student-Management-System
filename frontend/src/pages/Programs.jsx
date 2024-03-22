@@ -1,16 +1,12 @@
 import React from 'react';
-import Header from '../components/header';
 import { Link } from 'react-router-dom';
 
 const Programs = ({ programs }) => {
   return (
     <div className="flex flex-col h-screen">
-      <header>
-        <Header />
-      </header>
 
       {/* Main Content with margin-top to create space */}
-      <main className="p-4 mt-24 sm:mt-12 md:mt-16 lg:mt-20 xl:mt-24 lg:ml-32 lg:mr-32"> {/* Adjust the mt value based on your header height */}
+      <main className="p-4 lg:ml-32 lg:mr-32"> {/* Adjust the mt value based on your header height */}
         {/* Programs Heading */}
         <h2 className="text-2xl font-bold mb-4 mt-4 text-red-900 text-left">Programs</h2>
 

@@ -4,7 +4,7 @@ const feeController = require("../controllers/fee-controller");
 
 router.route("/").post(feeController.postFee);
 router.route("/all").get(feeController.getAllFees);
-router.route("/").get(feeController.getFeesByStudentId);
+router.route("/:student_id").get(feeController.getFeesByStudentId);
 
 
 module.exports = router;

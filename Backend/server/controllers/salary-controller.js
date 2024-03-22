@@ -39,16 +39,17 @@ const getAllSalaries = async (req, res) => {
 
 const getSalaryByStaffId = async (req, res) => {
     try {
-        const { staff_id } = req.body;
+        const { staff_id } = req.params;
 
         // Check if the staff with the given ID exists
         const existingStaff = await Staff.findOne({ staff_id });
         if (!existingStaff) {
             return res.status(404).send('Staff with the given ID not found');
         }
+        const salary = await Salary.find({ staff_id });
 
         // Find salary entries by staff_id
-        res.status(200).json(existingStaff);
+        res.status(200).json(salary);
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');

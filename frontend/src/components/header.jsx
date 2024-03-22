@@ -3,10 +3,10 @@ import React from 'react';
 function Header() {
     const headerStyle = {
         backgroundColor: 'white',
-        position: 'fixed',
+        position: 'relative',
         width: '100%',
         zIndex: 10,
-    };
+     };
 
     return (
         <header

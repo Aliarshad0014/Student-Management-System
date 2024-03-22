@@ -1,13 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+
 
 const StudentsTable = ({ students, handleAddClick }) => {
 
   return (
     <div>
       <div className="flex justify-end">
-        <button onClick={handleAddClick} className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded mb-4">
+      <Link to="/add-student" className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded mb-4">
           Add Student +
-        </button>
+        </Link>
       </div>
       <table className="table-auto w-full">
         <thead>
@@ -34,7 +36,7 @@ const StudentsTable = ({ students, handleAddClick }) => {
               <td className="border px-4 py-2">{student.contact_number}</td>
               <td className="border px-4 py-2">
                 <div className="flex justify-around">
-                  <button className="ml-2 px-2 py-1 bg-blue-500 hover:bg-blue-600 text-white rounded">Update</button>
+                  <Link to="/update-student" className="ml-2 px-2 py-1 bg-blue-500 hover:bg-blue-600 text-white rounded">Update</Link>
                   <button className="ml-2 px-2 py-1 bg-red-500 hover:bg-red-600 text-white rounded">Delete</button>
                 </div>
               </td>

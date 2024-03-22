@@ -13,7 +13,7 @@ const Courses = ({ courses }) => {
 
   return (
     <div className="flex flex-col h-screen">
-      <main className="p-4 mt-24 lg:ml-32 lg:mr-32 pb-16">
+      <main className="p-4 lg:ml-32 lg:mr-32 pb-16">
         {/* Courses Heading with Search Bar */}
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl text-red-800 font-bold">Courses</h2>

@@ -2,10 +2,10 @@ import React from 'react';
 
 const Campuses = ({ campuses }) => {
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col min-h-screen">
 
       {/* Main Content with margin-top to create space */}
-      <main className="p-4 mt-24 sm:mt-12 md:mt-16 lg:mt-20 xl:mt-24 lg:ml-32 lg:mr-32"> 
+      <main className="p-4 lg:ml-32 lg:mr-32"> 
       
         {/* Campuses Heading */}
         <h2 className="text-2xl font-bold mb-4 mt-4 text-red-900 text-left">Campuses</h2>
@@ -31,4 +31,3 @@ const Campuses = ({ campuses }) => {
 };
 
 export default Campuses;
-

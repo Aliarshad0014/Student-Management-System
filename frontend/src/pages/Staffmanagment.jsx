@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Header from '../components/header';
+import { Link } from 'react-router-dom';
 
 const StaffManagement = ({ staff }) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -20,11 +20,8 @@ const StaffManagement = ({ staff }) => {
 
   return (
     <div className="flex flex-col h-screen">
-      <header>
-        <Header />
-      </header>
 
-      <main className="p-4 mt-24 sm:mt-12 md:mt-16 lg:mt-20 xl:mt-24 lg:ml-32 lg:mr-32 flex flex-col">
+      <main className="p-4 lg:ml-32 lg:mr-32 flex flex-col">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-bold text-red-800">Staff Management</h2>
           <div className="flex">
@@ -44,12 +41,12 @@ const StaffManagement = ({ staff }) => {
           <ul className="divide-y divide-gray-200">
             {filteredStaff.map((staffMember) => (
               <li key={staffMember.id} className="py-3 text-left">
-                <a href={`/staff/${staffMember.staff_id}`}>
+                <Link to={`/staff-profile/${staffMember.staff_id}`} className="hover:underline">
                   <div>
-                    <h3 className="text-md font-semibold hover:underline">{staffMember.name}</h3>
+                    <h3 className="text-md font-semibold">{staffMember.name}</h3>
                     {/* Additional staff details can be added here */}
                   </div>
-                </a>
+                </Link>
               </li>
             ))}
           </ul>

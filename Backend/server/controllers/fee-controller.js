@@ -29,7 +29,7 @@ const postFee = async (req, res) => {
 
 const getFeesByStudentId = async (req, res) => {
     try {
-        const { student_id } = req.body;
+        const { student_id } = req.params;
 
         // Check if the student with the given ID exists
         const existingStudent = await Student.findOne({ student_id });
@@ -37,13 +37,17 @@ const getFeesByStudentId = async (req, res) => {
             return res.status(404).send('Student with the given ID not found');
         }
 
-        // Get fees for the student
-        res.status(200).json(existingStudent);
+        // Get fees for the student by matching the student_id field inside the Fee object
+        const fees = await Fee.find({ student_id });
+
+        // Return the fees in the response
+        res.status(200).json(fees);
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');
     }
 };
+
 
 const getAllFees = async (req, res) => {
     try {

@@ -56,7 +56,7 @@ const getAllStaffMembers = async (req, res) => {
 
 const staffHandleGetById = async (req, res) => {
     try {
-        const { staff_id } = req.body;
+        const { staff_id } = req.params;
 
         // Check if the staff member with the given staff_id exists
         const existingStaff = await Staff.findOne({ staff_id });

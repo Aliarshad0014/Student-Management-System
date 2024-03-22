@@ -5,7 +5,7 @@ const Departments = ({ departments }) => {
     <div className="flex flex-col h-screen">
 
       {/* Main Content with margin-top to create space */}
-      <main className="p-4 mt-24 sm:mt-12 md:mt-16 lg:mt-20 xl:mt-24 lg:ml-32 lg:mr-32"> {/* Adjust the mt value based on your header height */}
+      <main className="p-4 lg:ml-32 lg:mr-32"> {/* Adjust the mt value based on your header height */}
         {/* Departments Heading */}
         <h2 className="text-2xl font-bold mb-4 mt-4 text-red-800 text-left">Departments</h2>
 

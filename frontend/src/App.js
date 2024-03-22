@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter as Router, Route, Routes, json } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Footer from './components/footer';
 import Header from './components/header';
 import Campuses from './pages/Campusespage';
@@ -17,6 +17,16 @@ import UpdatePage from './pages/updatePage';
 import AddPage from './pages/addPage';
 import Register from './pages/Register';
 import { useState, useEffect } from 'react';
+import AddCourses from './pages/addCourses';
+import AddDepartments from './pages/addDepartments';
+import AddPrograms from './pages/addProgram';
+import AddStudent from './pages/addStudent';
+import AddStaff from './pages/addStaff';
+import UpdateCourse from './pages/updateCourses';
+import UpdateDepartment from './pages/updateDepartment';
+import UpdateProgram from './pages/updateProgram';
+import UpdateStaff from './pages/updateStaff';
+import UpdateStudent from './pages/updateStudent';
 
 function App() {
   const [studentInCourses, setstudentInCourses] = useState([]);
@@ -27,6 +37,9 @@ function App() {
   const [programs, setPrograms] = useState([]);
   const [staff, setStaff] = useState([]);
   const [students, setStudents] = useState([]);
+  const [fee, setFee] = useState([]);
+  const [salary, setSalary] = useState([]);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,7 +57,7 @@ function App() {
         setstudentInCourses(data);
         console.log(data)
       } catch (error) {
-        console.error('Error fetching student in courses data:', error.message);
+        console.error('Error fetching student in studentincourses data:', error.message);
       }
     };
     fetchData();
@@ -66,7 +79,7 @@ function App() {
         setCampuses(data);
         console.log(data)
       } catch (error) {
-        console.error('Error fetching student in courses data:', error.message);
+        console.error('Error fetching student in campus data:', error.message);
       }
     };
     fetchData();
@@ -110,7 +123,7 @@ function App() {
         setDepartments(data);
         console.log(data)
       } catch (error) {
-        console.error('Error fetching student in courses data:', error.message);
+        console.error('Error fetching student in department data:', error.message);
       }
     };
     fetchData();
@@ -132,7 +145,7 @@ function App() {
         setDocuments(data);
         console.log(data)
       } catch (error) {
-        console.error('Error fetching student in courses data:', error.message);
+        console.error('Error fetching student in document data:', error.message);
       }
     };
     fetchData();
@@ -154,7 +167,7 @@ function App() {
         setPrograms(data);
         console.log(data)
       } catch (error) {
-        console.error('Error fetching student in courses data:', error.message);
+        console.error('Error fetching student in program data:', error.message);
       }
     };
     fetchData();
@@ -176,7 +189,7 @@ function App() {
         setStaff(data);
         console.log(data)
       } catch (error) {
-        console.error('Error fetching student in courses data:', error.message);
+        console.error('Error fetching student in staff data:', error.message);
       }
     };
     fetchData();
@@ -198,7 +211,51 @@ function App() {
         setStudents(data);
         console.log(data)
       } catch (error) {
-        console.error('Error fetching student in courses data:', error.message);
+        console.error('Error fetching student in student data:', error.message);
+      }
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/salary/all', {
+          method: "GET",
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
+        }
+        const data = await response.json();
+        setSalary(data);
+        console.log(data)
+      } catch (error) {
+        console.error('Error fetching student in salary data:', error.message);
+      }
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/fee/all', {
+          method: "GET",
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
+        }
+        const data = await response.json();
+        setFee(data);
+        console.log(data)
+      } catch (error) {
+        console.error('Error fetching student in fee data:', error.message);
       }
     };
     fetchData();
@@ -219,11 +276,21 @@ function App() {
             <Route path="/courses" element={<Courses courses={courses} />} />
             <Route path="/student-management" element={<StudentManagement students={students} />} />
             <Route path="/staff-management" element={<StaffManagement staff={staff} />} />
-            <Route path="/student-profile" element={<StudentProfile />} />
-            <Route path="/staff-profile" element={<StaffProfile />} />
+            <Route path="/student-profile/:id" element={<StudentProfile fee={fee} documents={documents}/>} />
+            <Route path="/staff-profile/:id" element={<StaffProfile staff={staff} salary={salary} documents={documents}/>} />
             <Route path="/admin" element={<AdminPage campuses={campuses} courses={courses} departments={departments} documents={documents} programs={programs} staff={staff} students={students} />} />
-            <Route path="/update" element={<UpdatePage />} />
-            <Route path="/add" element={<AddPage />} />
+            <Route path="/update-campus" element={<UpdatePage />} />
+            <Route path="/update-course" element={<UpdateCourse />} />
+            <Route path="/update-department" element={<UpdateDepartment />} />
+            <Route path="/update-program" element={<UpdateProgram />} />
+            <Route path="/update-staff" element={<UpdateStaff />} />
+            <Route path="/update-student" element={<UpdateStudent />} />
+            <Route path="/add-campuses" element={<AddPage />} />
+            <Route path="/add-courses" element={<AddCourses />} />
+            <Route path="/add-departments" element={<AddDepartments />} />
+            <Route path="/add-program" element={<AddPrograms />} />
+            <Route path="/add-student" element={<AddStudent />} />
+            <Route path="/add-staff" element={<AddStaff />} />
           </Routes>
         </div>
         <Footer />

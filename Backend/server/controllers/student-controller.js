@@ -64,7 +64,7 @@ const getAllStudents = async (req, res) => {
 
 const studentHandleGetById = async (req, res) => {
     try {
-        const { student_id } = req.body;
+        const { student_id } = req.params;
 
         // Check if the student with the given student_id exists
         const existingStudent = await Student.findOne({ student_id });

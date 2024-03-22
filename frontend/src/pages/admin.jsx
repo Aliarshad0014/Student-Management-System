@@ -42,10 +42,10 @@ const AdminPage = ({ campuses, courses, departments, programs, staff, students }
   return (
     <div className="flex flex-col h-screen bg-white text-left">
       {/* Admin Panel Heading */}
-      <h1 className="text-2xl font-bold m-6 ml-10">Admin Panel</h1>
+      <h1 className="text-2xl font-bold mt-4 ml-10">Admin Panel</h1>
 
       {/* Main Content with border */}
-      <div className="flex ml-10 mr-10 h-5/6 border border-black bg-purple-100 mt-10 mb-10">
+      <div className="flex ml-10 mr-10 h-5/6 border border-black bg-purple-100 mt-4 mb-10">
         {/* Sidebar */}
         <div className="w-1/4 p-4">
           <h2 className="text-lg font-semibold mb-4">System Data</h2>

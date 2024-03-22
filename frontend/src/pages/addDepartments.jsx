@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 
-const AddPage = () => {
+const AddDepartments = () => {
     // Define initial state for input values
     const [inputValues, setInputValues] = useState({
-        campusId: '',
+        departmentId: '',
         name: '',
-        location: '',
         contactNumber: '',
-        manager: ''
+        headOfDepartment: ''
     });
 
     // Handle input change
@@ -25,14 +24,14 @@ const AddPage = () => {
 
     return (
         <div className="max-w-lg mx-auto mb-8 mt-8 p-6 bg-purple-100 shadow-md rounded-md text-left">
-            <h2 className="text-xl font-semibold mb-4">Add New Campus</h2>
+            <h2 className="text-xl font-semibold mb-4">Add New Department</h2>
             <form onSubmit={handleSubmit}>
                 <div className="mb-4">
-                    <label className="block text-gray-700">Campus ID</label>
+                    <label className="block text-gray-700">Department ID</label>
                     <input
                         type="text"
-                        name="campusId"
-                        value={inputValues.campusId}
+                        name="departmentId"
+                        value={inputValues.departmentId}
                         onChange={handleInputChange}
                         className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     />
@@ -48,16 +47,6 @@ const AddPage = () => {
                     />
                 </div>
                 <div className="mb-4">
-                    <label className="block text-gray-700">Location</label>
-                    <input
-                        type="text"
-                        name="location"
-                        value={inputValues.location}
-                        onChange={handleInputChange}
-                        className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                    />
-                </div>
-                <div className="mb-4">
                     <label className="block text-gray-700">Contact Number</label>
                     <input
                         type="text"
@@ -68,11 +57,11 @@ const AddPage = () => {
                     />
                 </div>
                 <div className="mb-4">
-                    <label className="block text-gray-700">Manager</label>
+                    <label className="block text-gray-700">Head of Department</label>
                     <input
                         type="text"
-                        name="manager"
-                        value={inputValues.manager}
+                        name="headOfDepartment"
+                        value={inputValues.headOfDepartment}
                         onChange={handleInputChange}
                         className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     />
@@ -90,5 +79,4 @@ const AddPage = () => {
     );
 };
 
-export default AddPage;
-
+export default AddDepartments;
