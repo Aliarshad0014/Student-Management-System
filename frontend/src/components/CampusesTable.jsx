@@ -9,35 +9,35 @@ const CampusesTable = ({ campuses, onAddClick }) => {
   };
 
   return (
-    <div>
+    <div className="overflow-x-auto">
       <div className="flex justify-end">
-        <Link to="/add-campuses" className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded mb-4">
+        <Link to="/add-campuses" className="bg-green-500 hover:bg-green-600 font-bold text-white px-4 py-2 rounded mb-4">
           Add Campus +
         </Link>
       </div>
-      <table className="table-auto w-full h-full">
-        <thead>
+      <table className="min-w-full divide-y divide-gray-200">
+        <thead className="bg-gray-50">
           <tr>
-            <th className="px-2 py-2 w-1/6">Campus ID</th>
-            <th className="px-2 py-2 w-1/6">Name</th>
-            <th className="px-2 py-2 w-1/4">Location</th>
-            <th className="px-2 py-2 w-1/6">Contact Number</th>
-            <th className="px-2 py-2 w-1/6">Manager</th>
-            <th className="px-2 py-2 w-1/6">Actions</th>
+            <th className="px-6 py-3 text-left text-xs text-gray-500 uppercase">Campus ID</th>
+            <th className="px-6 py-3 text-left text-xs text-gray-500 uppercase">Name</th>
+            <th className="px-6 py-3 text-left text-xs text-gray-500 uppercase">Location</th>
+            <th className="px-6 py-3 text-left text-xs text-gray-500 uppercase">Contact Number</th>
+            <th className="px-6 py-3 text-left text-xs text-gray-500 uppercase">Manager</th>
+            <th className="px-16 py-3 text-left text-xs text-gray-500 uppercase">Actions</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="bg-white divide-y divide-gray-200">
           {campuses.map((campus, index) => (
             <tr key={index} className=' bg-white'>
-              <td className="border px-4 py-2">{campus.campus_id}</td>
-              <td className="border px-4 py-2">{campus.name}</td>
-              <td className="border px-4 py-2">{campus.location}</td>
-              <td className="border px-4 py-2">{campus.contact_number}</td>
-              <td className="border px-4 py-2">{campus.manager}</td>
-              <td className="border px-4 py-2 text-right">
-                <div className="flex justify-around">
-                  <Link to="/update-campus" className="ml-2 px-2 py-1 bg-blue-500 hover:bg-blue-600 text-white rounded">Update</Link>
-                  <button className="ml-2 px-2 py-1 bg-red-500 hover:bg-red-600 text-white rounded">Delete</button>
+              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{campus.campus_id}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{campus.location}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{campus.name}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{campus.contact_number}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{campus.manager}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                <div className="whitespace-nowrap text-sm text-gray-900">
+                  <Link to="/update-campus" className="ml-2 px-2 py-1 font-bold bg-blue-500 hover:bg-blue-600 text-white rounded">Update</Link>
+                  <button className="ml-2 px-2 py-1 font-bold bg-red-500 hover:bg-red-600 text-white rounded">Delete</button>
                 </div>
               </td>
             </tr>

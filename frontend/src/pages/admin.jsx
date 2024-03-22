@@ -5,11 +5,14 @@ import DepartmentTable from '../components/Departmenttable';
 import ProgramTable from '../components/Programtable';
 import StaffTable from '../components/Stafftable';
 import StudentsTable from '../components/Studenttable';
+import FeeTable from '../components/Feetable';
+import SalaryTable from '../components/Salarytable';
+
 
 // AdminPage component
-const AdminPage = ({ campuses, courses, departments, programs, staff, students }) => {
+const AdminPage = ({ campuses, courses, departments, programs, staff, students, fee, salary }) => {
   // Sample data for the system
-  const systemData = ['Campuses', 'Courses', 'Departments', 'Programs', 'Staff', 'Student'];
+  const systemData = ['Campuses', 'Courses', 'Departments', 'Programs', 'Staff', 'Student', 'Fee', 'Salary'];
 
   // State to store the selected item
   const [selectedItem, setSelectedItem] = useState(null);
@@ -34,6 +37,10 @@ const AdminPage = ({ campuses, courses, departments, programs, staff, students }
         return <StaffTable staff={staff}/>;
       case 'Student':
         return <StudentsTable students={students}/>;
+        case 'Fee':
+        return <FeeTable fees={fee}/>;
+        case 'Salary':
+        return <SalaryTable salaries={salary}/>;
       default:
         return null;
     }

@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 const AddCourses = () => {
     // Define initial state for input values
     const [inputValues, setInputValues] = useState({
-        courseId: '',
-        programId: '',
+        course_id: '',
+        program_id: '',
         name: '',
         credits: ''
     });
@@ -16,10 +16,30 @@ const AddCourses = () => {
     };
 
     // Handle form submission
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Handle form submission logic here (e.g., sending data to backend)
-        console.log('Form submitted with data:', inputValues);
+        try {
+            const response = await fetch('http://localhost:5000/api/course/post', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(inputValues)
+            });
+            if (!response.ok) {
+                throw new Error('Failed to add course');
+            }
+            console.log('Course added successfully!');
+            // Optionally, reset the form fields
+            setInputValues({
+                course_id: '',
+                program_id: '',
+                name: '',
+                credits: ''
+            });
+        } catch (error) {
+            console.error('Error adding course:', error.message);
+        }
     };
 
     return (
@@ -30,8 +50,8 @@ const AddCourses = () => {
                     <label className="block text-gray-700">Course ID</label>
                     <input
                         type="text"
-                        name="courseId"
-                        value={inputValues.courseId}
+                        name="course_id"
+                        value={inputValues.course_id}
                         onChange={handleInputChange}
                         className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     />
@@ -40,8 +60,8 @@ const AddCourses = () => {
                     <label className="block text-gray-700">Program ID</label>
                     <input
                         type="text"
-                        name="programId"
-                        value={inputValues.programId}
+                        name="program_id"
+                        value={inputValues.program_id}
                         onChange={handleInputChange}
                         className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     />

@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 
-const AddDepartments = () => {
+const AddSalary = () => {
     // Define initial state for input values
     const [inputValues, setInputValues] = useState({
-        department_id: '',
-        name: '',
-        contact_number: '',
-        head_of_department: ''
+        salaryId: '',
+        staffId: '',
+        amount: '',
+        month: '',
+        paid: ''
     });
 
     // Handle input change
@@ -16,72 +17,62 @@ const AddDepartments = () => {
     };
 
     // Handle form submission
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        try {
-            const response = await fetch('http://localhost:5000/api/department/post', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(inputValues)
-            });
-            if (!response.ok) {
-                throw new Error('Failed to add department');
-            }
-            console.log('Department added successfully!');
-            // Optionally, reset the form fields
-            setInputValues({
-                department_id: '',
-                name: '',
-                contact_number: '',
-                head_of_department: ''
-            });
-        } catch (error) {
-            console.error('Error adding department:', error.message);
-        }
+        // Handle form submission logic here (e.g., sending data to backend)
+        console.log('Form submitted with data:', inputValues);
     };
 
     return (
         <div className="max-w-lg mx-auto mb-8 mt-8 p-6 bg-purple-100 shadow-md rounded-md text-left">
-            <h2 className="text-xl font-semibold mb-4">Add New Department</h2>
+            <h2 className="text-xl font-semibold mb-4">Add New Salary</h2>
             <form onSubmit={handleSubmit}>
                 <div className="mb-4">
-                    <label className="block text-gray-700">Department ID</label>
+                    <label className="block text-gray-700">Salary ID</label>
                     <input
                         type="text"
-                        name="department_id"
-                        value={inputValues.department_id}
+                        name="salaryId"
+                        value={inputValues.salaryId}
                         onChange={handleInputChange}
                         className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     />
                 </div>
                 <div className="mb-4">
-                    <label className="block text-gray-700">Name</label>
+                    <label className="block text-gray-700">Staff ID</label>
                     <input
                         type="text"
-                        name="name"
-                        value={inputValues.name}
+                        name="staffId"
+                        value={inputValues.staffId}
                         onChange={handleInputChange}
                         className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     />
                 </div>
                 <div className="mb-4">
-                    <label className="block text-gray-700">Contact Number</label>
+                    <label className="block text-gray-700">Amount</label>
                     <input
                         type="text"
-                        name="contact_number"
-                        value={inputValues.contact_number}
+                        name="amount"
+                        value={inputValues.amount}
                         onChange={handleInputChange}
                         className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     />
                 </div>
                 <div className="mb-4">
-                    <label className="block text-gray-700">Head of Department</label>
+                    <label className="block text-gray-700">Month</label>
                     <input
                         type="text"
-                        name="head_of_department"
-                        value={inputValues.head_of_department}
+                        name="month"
+                        value={inputValues.month}
+                        onChange={handleInputChange}
+                        className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    />
+                </div>
+                <div className="mb-4">
+                    <label className="block text-gray-700">Paid</label>
+                    <input
+                        type="text"
+                        name="paid"
+                        value={inputValues.paid}
                         onChange={handleInputChange}
                         className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     />
@@ -99,4 +90,4 @@ const AddDepartments = () => {
     );
 };
 
-export default AddDepartments;
+export default AddSalary;

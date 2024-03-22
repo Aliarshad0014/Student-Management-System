@@ -2,7 +2,7 @@ import React from 'react';
 
 const Departments = ({ departments }) => {
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col min-h-screen">
 
       {/* Main Content with margin-top to create space */}
       <main className="p-4 lg:ml-32 lg:mr-32"> {/* Adjust the mt value based on your header height */}

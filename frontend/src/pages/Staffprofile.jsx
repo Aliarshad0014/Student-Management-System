@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-const StaffProfile = ({salary, documents }) => {
+const StaffProfile = ({ salary, documents }) => {
   const [staff, setStaffData] = useState([]);
   const [salaries, setSalary] = useState([]);
 
@@ -50,7 +50,7 @@ const StaffProfile = ({salary, documents }) => {
     fetchStaffData();
   }, [id]);
 
-  
+
 
   return (
     <div className="flex flex-col min-h-screen text-left">
@@ -61,39 +61,33 @@ const StaffProfile = ({salary, documents }) => {
         {/* Staff Information */}
         <div className="flex flex-col md:flex-row items-start space-y-4 md:space-y-0 md:space-x-8">
           {/* Staff Photo */}
-          <div className="w-48 h-48 bg-gray-200 rounded-full overflow-hidden">
-            <img src={staff.photo} alt="Staff" className="w-full h-full object-cover" />
+          <div className="w-60 bg-gray-200 overflow-hidden">
+            <img src={'/static/images/default.png'} alt="Student" className="w-full h-full object-cover" />
           </div>
 
           {/* Staff Details */}
           <div className="flex-1">
-            <h3 className="text-xl font-semibold mb-2">{staff.name}</h3>
-            <p className="mb-2">Contact Number: {staff.contact_number}</p>
-            <p className="mb-2">Email: {staff.email}</p>
-
-            {/* Horizontal Line */}
-            <hr className="my-4 border-t border-gray-300" />
-
-            {/* Document List */}
-            <div>
-              <h4 className="text-lg font-semibold mb-2">Documents</h4>
-              <ul>
-                {documents.map((document, index) => (
-                  <li key={index}>{document.type}</li>
-                ))}
-              </ul>
-            </div>
+          <h3 className="text-xl font-semibold mb-2 text-red-700">{staff.name}</h3>
+            <p className="mb-2">Staff ID : {staff.staff_id}</p>
+            <p className="mb-2">Contact Number : {staff.contact_number}</p>
+            <p className="mb-2">Email : {staff.email}</p>
+            <p className="mb-2">Designation : {staff.designation}</p>
+            <p className="mb-2">Campus : {staff.campus_id}</p>
+            <p className="mb-2">Department : {staff.department_id}</p>
 
             {/* Horizontal Line */}
             <hr className="my-4 border-t border-gray-300" />
 
             {/* Salary Details */}
             <div>
-              <h4 className="text-lg font-semibold mb-2">Salary Details</h4>
+              <h4 className="text-lg font-semibold mb-2  text-red-700">Salary Details</h4>
               <ul>
                 {salaries.map((salary, index) => (
                   <li key={index}>
-                    <p>{salary.month} - {salary.amount} {salary.paid ? '(Paid)' : '(Not Paid)'}</p>
+                    <p className="mb-2">Salary ID : {salary.salary_id}</p>
+                    <p className="mb-2">Month : {salary.month}</p>
+                    <p className="mb-2">Amount : {salary.amount}</p>
+                    <p className="mb-2">Status : {salary.paid ? 'Paid' : 'Not Paid'}</p>
                   </li>
                 ))}
               </ul>

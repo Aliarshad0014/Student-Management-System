@@ -27,6 +27,10 @@ import UpdateDepartment from './pages/updateDepartment';
 import UpdateProgram from './pages/updateProgram';
 import UpdateStaff from './pages/updateStaff';
 import UpdateStudent from './pages/updateStudent';
+import AddSalary from './pages/addSalary';
+import UpdateSalary from './pages/updateSalary';
+import UpdateFee from './pages/updateFee';
+import AddFee from './pages/addFee';
 
 function App() {
   const [studentInCourses, setstudentInCourses] = useState([]);
@@ -278,19 +282,23 @@ function App() {
             <Route path="/staff-management" element={<StaffManagement staff={staff} />} />
             <Route path="/student-profile/:id" element={<StudentProfile fee={fee} documents={documents}/>} />
             <Route path="/staff-profile/:id" element={<StaffProfile staff={staff} salary={salary} documents={documents}/>} />
-            <Route path="/admin" element={<AdminPage campuses={campuses} courses={courses} departments={departments} documents={documents} programs={programs} staff={staff} students={students} />} />
+            <Route path="/admin" element={<AdminPage campuses={campuses} courses={courses} departments={departments} documents={documents} programs={programs} staff={staff} students={students} fee={fee} salary={salary}/>} />
             <Route path="/update-campus" element={<UpdatePage />} />
             <Route path="/update-course" element={<UpdateCourse />} />
             <Route path="/update-department" element={<UpdateDepartment />} />
             <Route path="/update-program" element={<UpdateProgram />} />
             <Route path="/update-staff" element={<UpdateStaff />} />
             <Route path="/update-student" element={<UpdateStudent />} />
+            <Route path="/update-salary" element={<UpdateSalary />} />
+            <Route path="/update-fee" element={<UpdateFee />} />
             <Route path="/add-campuses" element={<AddPage />} />
             <Route path="/add-courses" element={<AddCourses />} />
             <Route path="/add-departments" element={<AddDepartments />} />
             <Route path="/add-program" element={<AddPrograms />} />
             <Route path="/add-student" element={<AddStudent />} />
             <Route path="/add-staff" element={<AddStaff />} />
+            <Route path="/add-salary" element={<AddSalary />} />
+            <Route path="/add-fee" element={<AddFee />} />
           </Routes>
         </div>
         <Footer />
