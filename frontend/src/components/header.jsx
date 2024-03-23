@@ -22,8 +22,8 @@ function Header() {
                 <nav className="hidden md:hidden lg:flex">
                     <ul className="flex space-x-10 text-black text-lg font-light">
                         <li>
-                            <a href="/Campuses" className="hover:text-red-600 ease-in-out duration-300">
-                                Campuses
+                            <a href="/admin" className="hover:text-red-600 ease-in-out duration-300">
+                                Admin
                             </a>
                         </li>
                         <li>

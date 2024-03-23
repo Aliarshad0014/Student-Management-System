@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddDepartments = () => {
     // Define initial state for input values
@@ -29,7 +31,7 @@ const AddDepartments = () => {
             if (!response.ok) {
                 throw new Error('Failed to add department');
             }
-            console.log('Department added successfully!');
+            toast.success('Department added successfully!');
             // Optionally, reset the form fields
             setInputValues({
                 department_id: '',
@@ -38,7 +40,7 @@ const AddDepartments = () => {
                 head_of_department: ''
             });
         } catch (error) {
-            console.error('Error adding department:', error.message);
+            toast.error('Failed to add Department');        
         }
     };
 
@@ -95,6 +97,7 @@ const AddDepartments = () => {
                     </button>
                 </div>
             </form>
+            <ToastContainer />
         </div>
     );
 };

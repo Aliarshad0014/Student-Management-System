@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddPrograms = () => {
     // Define initial state for input values
@@ -29,7 +31,7 @@ const AddPrograms = () => {
             if (!response.ok) {
                 throw new Error('Failed to add program');
             }
-            console.log('Program added successfully!');
+            toast.success('Program added successfully!');
             // Optionally, reset the form fields
             setInputValues({
                 program_id: '',
@@ -38,7 +40,7 @@ const AddPrograms = () => {
                 awarding_body: ''
             });
         } catch (error) {
-            console.error('Error adding program:', error.message);
+            toast.error('Failed to add Program');        
         }
     };
 
@@ -95,6 +97,8 @@ const AddPrograms = () => {
                     </button>
                 </div>
             </form>
+            <ToastContainer />
+
         </div>
     );
 };

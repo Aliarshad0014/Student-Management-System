@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddSalary = () => {
     // Define initial state for input values
@@ -30,7 +32,7 @@ const AddSalary = () => {
             if (!response.ok) {
                 throw new Error('Failed to add salary');
             }
-            console.log('Salary added successfully!');
+            toast.success('Salary added successfully!');
             // Optionally, reset the form fields
             setInputValues({
                 salary_id: '',
@@ -40,7 +42,7 @@ const AddSalary = () => {
                 paid: ''
             });
         } catch (error) {
-            console.error('Error adding salary:', error.message);
+            toast.error('Failed to add Salary');        
         }
     };
 
@@ -107,6 +109,8 @@ const AddSalary = () => {
                     </button>
                 </div>
             </form>
+            <ToastContainer />
+
         </div>
     );
 };

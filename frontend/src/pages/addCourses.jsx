@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddCourses = () => {
     // Define initial state for input values
@@ -29,7 +31,7 @@ const AddCourses = () => {
             if (!response.ok) {
                 throw new Error('Failed to add course');
             }
-            console.log('Course added successfully!');
+            toast.success('Course added successfully!');
             // Optionally, reset the form fields
             setInputValues({
                 course_id: '',
@@ -38,7 +40,7 @@ const AddCourses = () => {
                 credits: ''
             });
         } catch (error) {
-            console.error('Error adding course:', error.message);
+            toast.error('Failed to add Course');        
         }
     };
 
@@ -95,6 +97,7 @@ const AddCourses = () => {
                     </button>
                 </div>
             </form>
+            <ToastContainer />
         </div>
     );
 };

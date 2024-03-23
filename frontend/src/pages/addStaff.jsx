@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddStaff = () => {
     // Define initial state for input values
@@ -33,7 +35,7 @@ const AddStaff = () => {
             if (!response.ok) {
                 throw new Error('Failed to add staff');
             }
-            console.log('Staff added successfully!');
+            toast.success('Staff added successfully!');
             // Optionally, reset the form fields
             setInputValues({
                 staff_id: '',
@@ -46,7 +48,7 @@ const AddStaff = () => {
                 designation: '' // Reset designation field
             });
         } catch (error) {
-            console.error('Error adding staff:', error.message);
+            toast.error('Failed to add Staff');        
         }
     };
 
@@ -145,6 +147,8 @@ const AddStaff = () => {
                     </button>
                 </div>
             </form>
+            <ToastContainer />
+
         </div>
     );
 };

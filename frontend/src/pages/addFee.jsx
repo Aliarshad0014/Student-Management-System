@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddFee = () => {
     // Define initial state for input values
@@ -31,7 +33,7 @@ const AddFee = () => {
             if (!response.ok) {
                 throw new Error('Failed to add fee');
             }
-            console.log('Fee added successfully!');
+            toast.success('Fee added successfully!');
             // Optionally, reset the form fields
             setInputValues({
                 fee_id: '',
@@ -42,7 +44,7 @@ const AddFee = () => {
                 paid: ''
             });
         } catch (error) {
-            console.error('Error adding fee:', error.message);
+            toast.error('Failed to add Fee');        
         }
     };
 
@@ -119,6 +121,8 @@ const AddFee = () => {
                     </button>
                 </div>
             </form>
+            <ToastContainer />
+
         </div>
     );
 };
