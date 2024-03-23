@@ -33,7 +33,7 @@ const getAllDepartments = async (req, res) => {
 
 const departmentHandleGetById = async (req, res) => {
     try {
-        const { department_id } = req.body;
+        const { department_id } = req.params;
 
         // Check if the department with the given department_id exists
         const existingDepartment = await Department.findOne({ department_id });

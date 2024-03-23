@@ -89,7 +89,7 @@ const getStudentsByCourseId = async (req, res) => {
 
 const getCoursesByStudentId = async (req, res) => {
     try {
-        const { student_id } = req.body;
+        const { student_id } = req.params;
 
         // Find all associations with the given student_id
         const associations = await CourseStudents.find({ student_id });

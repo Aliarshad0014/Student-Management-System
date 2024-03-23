@@ -1,22 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useParams } from 'react-router-dom';
+
 
 const UpdateDepartment = () => {
-  // Define initial sampleRowData state
-  const [sampleRowData, setSampleRowData] = useState({
-    departmentId: 'D001',
-    name: 'Computer Science',
-    contactNumber: '1234567890',
-    headOfDepartment: 'John Doe'
-  });
+  const [department, setDepartment] = useState([]);
+  const { id } = useParams(); // Get the ID from the URL params
 
   // Handle input change
   const handleInputChange = (name, value) => {
     // Update the sampleRowData state with the new value
-    const updatedRowData = { ...sampleRowData, [name]: value };
-    setSampleRowData(updatedRowData);
+    const updatedRowData = { ...department, [name]: value };
+    setDepartment(updatedRowData);
   };
+
+  useEffect(() => {
+    const fetchCourseData = async () => {
+      try {
+        const response = await fetch(`http://localhost:5000/api/department/${id}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        if (!response.ok) {
+          throw new Error('Failed to fetch Course data');
+        }
+        const data = await response.json();
+        console.log("course" + data)
+        setDepartment(data);
+      } catch (error) {
+        console.error('Error fetching Course data:', error.message);
+      }
+    };
+    fetchCourseData();
+  }, [id]);
 
   return (
     <div className="max-w-lg mx-auto mt-8 mb-8 p-6 bg-purple-100 shadow-md rounded-md text-left">
@@ -27,7 +46,7 @@ const UpdateDepartment = () => {
           <input
             type="text"
             name="departmentId"
-            value={sampleRowData.departmentId}
+            value={department.department_id}
             onChange={(e) => handleInputChange('departmentId', e.target.value)}
             className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
@@ -37,7 +56,7 @@ const UpdateDepartment = () => {
           <input
             type="text"
             name="name"
-            value={sampleRowData.name}
+            value={department.name}
             onChange={(e) => handleInputChange('name', e.target.value)}
             className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
@@ -47,7 +66,7 @@ const UpdateDepartment = () => {
           <input
             type="text"
             name="contactNumber"
-            value={sampleRowData.contactNumber}
+            value={department.contact_number}
             onChange={(e) => handleInputChange('contactNumber', e.target.value)}
             className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
@@ -57,7 +76,7 @@ const UpdateDepartment = () => {
           <input
             type="text"
             name="headOfDepartment"
-            value={sampleRowData.headOfDepartment}
+            value={department.head_of_department}
             onChange={(e) => handleInputChange('headOfDepartment', e.target.value)}
             className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />

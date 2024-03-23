@@ -36,7 +36,7 @@ const StaffTable = ({ staff, handleAddClick }) => {
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{staff.contact_number}</td>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900" >
                 <div className="whitespace-nowrap text-sm text-gray-900">
-                  <Link to="/update-staff" className="ml-2 px-2 py-1 font-bold bg-blue-500 hover:bg-blue-600 text-white rounded">Update</Link>
+                  <Link to={`/update-staff/${staff.staff_id}`} className="ml-2 px-2 py-1 font-bold bg-blue-500 hover:bg-blue-600 text-white rounded">Update</Link>
                   <button className="ml-2 px-2 py-1 font-bold bg-red-500 hover:bg-red-600 text-white rounded">Delete</button>
                 </div>
               </td>

@@ -33,7 +33,7 @@ const getAllDocuments = async (req, res) => {
 
 const documentHandleGetById = async (req, res) => {
     try {
-        const { document_id } = req.body;
+        const { document_id } = req.params;
 
         // Check if the document with the given document_id exists
         const existingDocument = await Document.findOne({ document_id });

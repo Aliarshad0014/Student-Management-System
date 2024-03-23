@@ -4,7 +4,7 @@ const programController = require("../controllers/program-controller");
 
 router.route("/post").post(programController.program);
 router.route("/all").get(programController.getAllPrograms);
-router.route("/").get(programController.programHandleGetById);
+router.route("/:program_id").get(programController.programHandleGetById);
 router.route("/delete").delete(programController.programHandleDelete);
 router.route("/put").put(programController.programHandleUpdate);
 

@@ -284,13 +284,13 @@ function App() {
             <Route path="/staff-profile/:id" element={<StaffProfile staff={staff} salary={salary} documents={documents}/>} />
             <Route path="/admin" element={<AdminPage campuses={campuses} courses={courses} departments={departments} documents={documents} programs={programs} staff={staff} students={students} fee={fee} salary={salary}/>} />
             <Route path="/update-campus" element={<UpdatePage />} />
-            <Route path="/update-course" element={<UpdateCourse />} />
-            <Route path="/update-department" element={<UpdateDepartment />} />
-            <Route path="/update-program" element={<UpdateProgram />} />
-            <Route path="/update-staff" element={<UpdateStaff />} />
-            <Route path="/update-student" element={<UpdateStudent />} />
-            <Route path="/update-salary" element={<UpdateSalary />} />
-            <Route path="/update-fee" element={<UpdateFee />} />
+            <Route path="/update-course/:id" element={<UpdateCourse />} />
+            <Route path="/update-department/:id" element={<UpdateDepartment />} />
+            <Route path="/update-program/:id" element={<UpdateProgram />} />
+            <Route path="/update-staff/:id" element={<UpdateStaff />} />
+            <Route path="/update-student/:id" element={<UpdateStudent />} />
+            <Route path="/update-salary/:id" element={<UpdateSalary />} />
+            <Route path="/update-fee/:id" element={<UpdateFee />} />
             <Route path="/add-campuses" element={<AddPage />} />
             <Route path="/add-courses" element={<AddCourses />} />
             <Route path="/add-departments" element={<AddDepartments />} />

@@ -43,7 +43,7 @@ const getAllPrograms = async (req, res) => {
 
 const programHandleGetById = async (req, res) => {
     try {
-        const { program_id } = req.body;
+        const { program_id } = req.params;
 
         // Check if the program with the given program_id exists
         const existingProgram = await Program.findOne({ program_id });
