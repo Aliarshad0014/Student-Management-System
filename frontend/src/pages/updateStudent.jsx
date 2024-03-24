@@ -1,39 +1,71 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useParams } from 'react-router-dom';
 
-
 const UpdateStudent = () => {
-  // Define initial sampleRowData state
-  const [sampleRowData, setSampleRowData] = useState({
-    studentId: 'S001',
-    campusId: 'C001',
-    programId: 'P001',
-    departmentId: 'D001',
-    name: 'John Doe',
-    email: 'johndoe@example.com',
-    contactNumber: '1234567890'
-  });
+  const [student, setStudent] = useState({});
+  const { id } = useParams(); // Get the ID from the URL params
 
   // Handle input change
   const handleInputChange = (name, value) => {
-    // Update the sampleRowData state with the new value
-    const updatedRowData = { ...sampleRowData, [name]: value };
-    setSampleRowData(updatedRowData);
+    // Update the student state with the new value
+    const updatedStudent = { ...student, [name]: value };
+    setStudent(updatedStudent);
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(`http://localhost:5000/api/student/put`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(student)
+      });
+      if (!response.ok) {
+        throw new Error('Failed to update student data');
+      }
+      toast.success('Student updated successfully');
+    } catch (error) {
+      console.error('Error updating student data:', error.message);
+      toast.error('Failed to update student data');
+    }
+  };
+
+  useEffect(() => {
+    const fetchStudentData = async () => {
+      try {
+        const response = await fetch(`http://localhost:5000/api/student/${id}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        if (!response.ok) {
+          throw new Error('Failed to fetch student data');
+        }
+        const data = await response.json();
+        setStudent(data);
+      } catch (error) {
+        console.error('Error fetching student data:', error.message);
+      }
+    };
+    fetchStudentData();
+  }, [id]);
 
   return (
     <div className="max-w-lg mx-auto mt-8 mb-8 p-6 bg-purple-100 shadow-md rounded-md text-left">
       <h2 className="text-xl font-semibold mb-4">Update Student Details</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-gray-700 pb-2 pt-2">Student ID</label>
           <input
             type="text"
-            name="studentId"
-            value={sampleRowData.studentId}
-            onChange={(e) => handleInputChange('studentId', e.target.value)}
+            name="student_id"
+            value={student.student_id}
+            onChange={(e) => handleInputChange('student_id', e.target.value)}
             className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
         </div>
@@ -41,9 +73,9 @@ const UpdateStudent = () => {
           <label className="block text-gray-700 pb-2 pt-2">Campus ID</label>
           <input
             type="text"
-            name="campusId"
-            value={sampleRowData.campusId}
-            onChange={(e) => handleInputChange('campusId', e.target.value)}
+            name="campus_id"
+            value={student.campus_id}
+            onChange={(e) => handleInputChange('campus_id', e.target.value)}
             className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
         </div>
@@ -51,9 +83,9 @@ const UpdateStudent = () => {
           <label className="block text-gray-700 pb-2 pt-2">Program ID</label>
           <input
             type="text"
-            name="programId"
-            value={sampleRowData.programId}
-            onChange={(e) => handleInputChange('programId', e.target.value)}
+            name="program_id"
+            value={student.program_id}
+            onChange={(e) => handleInputChange('program_id', e.target.value)}
             className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
         </div>
@@ -61,9 +93,9 @@ const UpdateStudent = () => {
           <label className="block text-gray-700 pb-2 pt-2">Department ID</label>
           <input
             type="text"
-            name="departmentId"
-            value={sampleRowData.departmentId}
-            onChange={(e) => handleInputChange('departmentId', e.target.value)}
+            name="department_id"
+            value={student.department_id}
+            onChange={(e) => handleInputChange('department_id', e.target.value)}
             className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
         </div>
@@ -72,7 +104,7 @@ const UpdateStudent = () => {
           <input
             type="text"
             name="name"
-            value={sampleRowData.name}
+            value={student.name}
             onChange={(e) => handleInputChange('name', e.target.value)}
             className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
@@ -82,7 +114,7 @@ const UpdateStudent = () => {
           <input
             type="email"
             name="email"
-            value={sampleRowData.email}
+            value={student.email}
             onChange={(e) => handleInputChange('email', e.target.value)}
             className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
@@ -91,9 +123,9 @@ const UpdateStudent = () => {
           <label className="block text-gray-700 pb-2 pt-2">Contact Number</label>
           <input
             type="text"
-            name="contactNumber"
-            value={sampleRowData.contactNumber}
-            onChange={(e) => handleInputChange('contactNumber', e.target.value)}
+            name="contact_number"
+            value={student.contact_number}
+            onChange={(e) => handleInputChange('contact_number', e.target.value)}
             className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
         </div>
@@ -106,6 +138,8 @@ const UpdateStudent = () => {
           </button>
         </div>
       </form>
+      <ToastContainer />
+
     </div>
   );
 };

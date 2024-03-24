@@ -61,7 +61,7 @@ const courseHandleGetById = async (req, res) => {
 
 const courseHandleDelete = async (req, res) => {
     try {
-        const { course_id } = req.body;
+        const { course_id } = req.params;
 
         // Check if the course exists
         const existingCourse = await Course.findOne({ course_id });

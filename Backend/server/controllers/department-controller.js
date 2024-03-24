@@ -51,7 +51,7 @@ const departmentHandleGetById = async (req, res) => {
 
 const departmentHandleDelete = async (req, res) => {
     try {
-        const { department_id } = req.body;
+        const { department_id } = req.params;
 
         // Check if the department exists
         const existingDepartment = await Department.findOne({ department_id });

@@ -1,38 +1,72 @@
-import React, { useState, useEffect  } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useParams } from 'react-router-dom';
 
-
 const UpdateFee = () => {
-  // Define initial sampleRowData state
-  const [sampleRowData, setSampleRowData] = useState({
-    feeId: 'F001',
-    studentId: 'ST001',
-    amount: '1000',
-    month: 'January',
-    dueDate: '2024-03-31',
-    paid: 'true'
-  });
+  const [fee, setFee] = useState({});
+  const { id } = useParams(); // Get the ID from the URL params
 
   // Handle input change
   const handleInputChange = (name, value) => {
-    // Update the sampleRowData state with the new value
-    const updatedRowData = { ...sampleRowData, [name]: value };
-    setSampleRowData(updatedRowData);
+    // Update the fee state with the new value
+    const updatedFee = { ...fee, [name]: value };
+    setFee(updatedFee);
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(`http://localhost:5000/api/fee/put`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(fee)
+      });
+      if (!response.ok) {
+        throw new Error('Failed to update fee data');
+      }
+      toast.success('Fee updated successfully');
+    } catch (error) {
+      console.error('Error updating fee data:', error.message);
+      toast.error('Failed to update fee data');
+    }
+  };
+
+  useEffect(() => {
+    const fetchFeeData = async () => {
+      try {
+        const response = await fetch(`http://localhost:5000/api/fee/${id}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        if (!response.ok) {
+          throw new Error('Failed to fetch fee data');
+        }
+        const data = await response.json();
+        console.log("fee"+ JSON.stringify(data))
+        setFee(data);
+      } catch (error) {
+        console.error('Error fetching fee data:', error.message);
+      }
+    };
+    fetchFeeData();
+  }, [id]);
 
   return (
     <div className="max-w-lg mx-auto mt-8 mb-8 p-6 bg-purple-100 shadow-md rounded-md text-left">
       <h2 className="text-xl font-semibold mb-4">Update Fee Details</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-gray-700 pb-2 pt-2">Fee ID</label>
           <input
             type="text"
-            name="feeId"
-            value={sampleRowData.feeId}
-            onChange={(e) => handleInputChange('feeId', e.target.value)}
+            name="fee_id"
+            value={fee.fee_id}
+            onChange={(e) => handleInputChange('fee_id', e.target.value)}
             className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
         </div>
@@ -40,9 +74,9 @@ const UpdateFee = () => {
           <label className="block text-gray-700 pb-2 pt-2">Student ID</label>
           <input
             type="text"
-            name="studentId"
-            value={sampleRowData.studentId}
-            onChange={(e) => handleInputChange('studentId', e.target.value)}
+            name="student_id"
+            value={fee.student_id}
+            onChange={(e) => handleInputChange('student_id', e.target.value)}
             className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
         </div>
@@ -51,7 +85,7 @@ const UpdateFee = () => {
           <input
             type="text"
             name="amount"
-            value={sampleRowData.amount}
+            value={fee.amount}
             onChange={(e) => handleInputChange('amount', e.target.value)}
             className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
@@ -61,7 +95,7 @@ const UpdateFee = () => {
           <input
             type="text"
             name="month"
-            value={sampleRowData.month}
+            value={fee.month}
             onChange={(e) => handleInputChange('month', e.target.value)}
             className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
@@ -71,8 +105,8 @@ const UpdateFee = () => {
           <input
             type="text"
             name="dueDate"
-            value={sampleRowData.dueDate}
-            onChange={(e) => handleInputChange('dueDate', e.target.value)}
+            value={fee.due_date}
+            onChange={(e) => handleInputChange('due_date', e.target.value)}
             className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
         </div>
@@ -81,7 +115,7 @@ const UpdateFee = () => {
           <input
             type="text"
             name="paid"
-            value={sampleRowData.paid}
+            value={fee.paid}
             onChange={(e) => handleInputChange('paid', e.target.value)}
             className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
@@ -95,6 +129,7 @@ const UpdateFee = () => {
           </button>
         </div>
       </form>
+      <ToastContainer />
     </div>
   );
 };

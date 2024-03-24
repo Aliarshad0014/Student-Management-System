@@ -1,13 +1,35 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+const DepartmentTable = ({ departments }) => {
+  const handleDeleteClick = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/department/delete/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
 
-const DepartmentTable = ({ departments, handleAddClick }) => {
+      if (!response.ok) {
+        throw new Error('Failed to delete department');
+      }
+
+      toast.success('Department deleted successfully!');
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    } catch (error) {
+      toast.error('Failed to delete department');
+    }
+  };
 
   return (
     <div className="overflow-x-auto">
       <div className="flex justify-end">
-      <Link to="/add-departments" className="bg-green-500 hover:bg-green-600 font-bold text-white px-4 py-2 rounded mb-4">
+        <Link to="/add-departments" className="bg-green-500 hover:bg-green-600 font-bold text-white px-4 py-2 rounded mb-4">
           Add Department +
         </Link>
       </div>
@@ -31,15 +53,17 @@ const DepartmentTable = ({ departments, handleAddClick }) => {
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                 <div className="whitespace-nowrap text-sm text-gray-900">
                   <Link to={`/update-department/${department.department_id}`} className="ml-2 px-2 py-1 font-bold bg-blue-500 hover:bg-blue-600 text-white rounded">Update</Link>
-                  <button className="ml-2 px-2 py-1 font-bold bg-red-500 hover:bg-red-600 text-white rounded">Delete</button>
+                  <button onClick={() => handleDeleteClick(department.department_id)} className="ml-2 px-2 py-1 font-bold bg-red-500 hover:bg-red-600 text-white rounded">Delete</button>
                 </div>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      <ToastContainer />
     </div>
   );
 };
 
-export default DepartmentTable; 
+export default DepartmentTable;
+

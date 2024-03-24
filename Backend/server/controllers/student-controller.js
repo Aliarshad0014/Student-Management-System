@@ -83,7 +83,7 @@ const studentHandleGetById = async (req, res) => {
 
 const studentHandleDelete = async (req, res) => {
     try {
-        const { student_id } = req.body;
+        const { student_id } = req.params;
 
         // Check if the student exists
         const existingStudent = await Student.findOne({ student_id });

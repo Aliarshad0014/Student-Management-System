@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Programs = ({ programs }) => {
+  console.log("programs" + JSON.stringify(programs));
   return (
     <div className="flex flex-col h-screen">
 

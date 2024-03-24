@@ -3,34 +3,69 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useParams } from 'react-router-dom';
 
-
 const UpdateProgram = () => {
-  // Define initial sampleRowData state
-  const [sampleRowData, setSampleRowData] = useState({
-    programId: 'P001',
-    departmentId: 'D001',
-    name: 'Computer Science',
-    awardingBody: 'XYZ University'
-  });
+  const [program, setProgram] = useState({});
+  const { id } = useParams(); // Get the ID from the URL params
 
   // Handle input change
   const handleInputChange = (name, value) => {
-    // Update the sampleRowData state with the new value
-    const updatedRowData = { ...sampleRowData, [name]: value };
-    setSampleRowData(updatedRowData);
+    // Update the program state with the new value
+    const updatedProgram = { ...program, [name]: value };
+    setProgram(updatedProgram);
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(`http://localhost:5000/api/program/put`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(program)
+      });
+      if (!response.ok) {
+        throw new Error('Failed to update program data');
+      }
+      toast.success('Program updated successfully');
+    } catch (error) {
+      console.error('Error updating program data:', error.message);
+      toast.error('Failed to update program data');
+    }
+  };
+
+  useEffect(() => {
+    const fetchProgramData = async () => {
+      try {
+        const response = await fetch(`http://localhost:5000/api/program/${id}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        if (!response.ok) {
+          throw new Error('Failed to fetch program data');
+        }
+        const data = await response.json();
+        setProgram(data);
+      } catch (error) {
+        console.error('Error fetching program data:', error.message);
+      }
+    };
+    fetchProgramData();
+  }, [id]);
 
   return (
     <div className="max-w-lg mx-auto mt-8 mb-8 p-6 bg-purple-100 shadow-md rounded-md text-left">
       <h2 className="text-xl font-semibold mb-4">Update Program Details</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-gray-700 pb-2 pt-2">Program ID</label>
           <input
             type="text"
-            name="programId"
-            value={sampleRowData.programId}
-            onChange={(e) => handleInputChange('programId', e.target.value)}
+            name="program_id"
+            value={program.program_id}
+            onChange={(e) => handleInputChange('program_id', e.target.value)}
             className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
         </div>
@@ -38,9 +73,9 @@ const UpdateProgram = () => {
           <label className="block text-gray-700 pb-2 pt-2">Department ID</label>
           <input
             type="text"
-            name="departmentId"
-            value={sampleRowData.departmentId}
-            onChange={(e) => handleInputChange('departmentId', e.target.value)}
+            name="department_id"
+            value={program.department_id}
+            onChange={(e) => handleInputChange('department_id', e.target.value)}
             className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
         </div>
@@ -49,7 +84,7 @@ const UpdateProgram = () => {
           <input
             type="text"
             name="name"
-            value={sampleRowData.name}
+            value={program.name}
             onChange={(e) => handleInputChange('name', e.target.value)}
             className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
@@ -58,9 +93,9 @@ const UpdateProgram = () => {
           <label className="block text-gray-700 pb-2 pt-2">Awarding Body</label>
           <input
             type="text"
-            name="awardingBody"
-            value={sampleRowData.awardingBody}
-            onChange={(e) => handleInputChange('awardingBody', e.target.value)}
+            name="awarding_body"
+            value={program.awarding_body}
+            onChange={(e) => handleInputChange('awarding_body', e.target.value)}
             className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
         </div>
@@ -73,6 +108,7 @@ const UpdateProgram = () => {
           </button>
         </div>
       </form>
+      <ToastContainer />
     </div>
   );
 };

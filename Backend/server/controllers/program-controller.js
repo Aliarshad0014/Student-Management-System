@@ -61,7 +61,7 @@ const programHandleGetById = async (req, res) => {
 
 const programHandleDelete = async (req, res) => {
     try {
-        const { program_id } = req.body;
+        const { program_id } = req.params;
 
         // Check if the program exists
         const existingProgram = await Program.findOne({ program_id });

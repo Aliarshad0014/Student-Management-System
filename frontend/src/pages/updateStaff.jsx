@@ -1,39 +1,71 @@
-import React, { useState, useEffect  } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useParams } from 'react-router-dom';
 
-
 const UpdateStaff = () => {
-  // Define initial sampleRowData state
-  const [sampleRowData, setSampleRowData] = useState({
-    staffId: 'ST001',
-    campusId: 'C001',
-    departmentId: 'D001',
-    name: 'John Smith',
-    designation: 'Teacher',
-    email: 'johnsmith@example.com',
-    contactNumber: '1234567890'
-  });
+  const [staff, setStaff] = useState({});
+  const { id } = useParams(); // Get the ID from the URL params
 
   // Handle input change
   const handleInputChange = (name, value) => {
-    // Update the sampleRowData state with the new value
-    const updatedRowData = { ...sampleRowData, [name]: value };
-    setSampleRowData(updatedRowData);
+    // Update the staff state with the new value
+    const updatedStaff = { ...staff, [name]: value };
+    setStaff(updatedStaff);
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(`http://localhost:5000/api/staff/put`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(staff)
+      });
+      if (!response.ok) {
+        throw new Error('Failed to update staff data');
+      }
+      toast.success('Staff updated successfully');
+    } catch (error) {
+      console.error('Error updating staff data:', error.message);
+      toast.error('Failed to update staff data');
+    }
+  };
+
+  useEffect(() => {
+    const fetchStaffData = async () => {
+      try {
+        const response = await fetch(`http://localhost:5000/api/staff/${id}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        if (!response.ok) {
+          throw new Error('Failed to fetch staff data');
+        }
+        const data = await response.json();
+        setStaff(data);
+      } catch (error) {
+        console.error('Error fetching staff data:', error.message);
+      }
+    };
+    fetchStaffData();
+  }, [id]);
 
   return (
     <div className="max-w-lg mx-auto mt-8 mb-8 p-6 bg-purple-100 shadow-md rounded-md text-left">
       <h2 className="text-xl font-semibold mb-4">Update Staff Details</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-gray-700 pb-2 pt-2">Staff ID</label>
           <input
             type="text"
-            name="staffId"
-            value={sampleRowData.staffId}
-            onChange={(e) => handleInputChange('staffId', e.target.value)}
+            name="staff_id"
+            value={staff.staff_id}
+            onChange={(e) => handleInputChange('staff_id', e.target.value)}
             className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
         </div>
@@ -41,9 +73,9 @@ const UpdateStaff = () => {
           <label className="block text-gray-700 pb-2 pt-2">Campus ID</label>
           <input
             type="text"
-            name="campusId"
-            value={sampleRowData.campusId}
-            onChange={(e) => handleInputChange('campusId', e.target.value)}
+            name="campus_id"
+            value={staff.campus_id}
+            onChange={(e) => handleInputChange('campus_id', e.target.value)}
             className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
         </div>
@@ -51,9 +83,9 @@ const UpdateStaff = () => {
           <label className="block text-gray-700 pb-2 pt-2">Department ID</label>
           <input
             type="text"
-            name="departmentId"
-            value={sampleRowData.departmentId}
-            onChange={(e) => handleInputChange('departmentId', e.target.value)}
+            name="department_id"
+            value={staff.department_id}
+            onChange={(e) => handleInputChange('department_id', e.target.value)}
             className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
         </div>
@@ -62,7 +94,7 @@ const UpdateStaff = () => {
           <input
             type="text"
             name="name"
-            value={sampleRowData.name}
+            value={staff.name}
             onChange={(e) => handleInputChange('name', e.target.value)}
             className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
@@ -72,7 +104,7 @@ const UpdateStaff = () => {
           <input
             type="text"
             name="designation"
-            value={sampleRowData.designation}
+            value={staff.designation}
             onChange={(e) => handleInputChange('designation', e.target.value)}
             className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
@@ -82,7 +114,7 @@ const UpdateStaff = () => {
           <input
             type="email"
             name="email"
-            value={sampleRowData.email}
+            value={staff.email}
             onChange={(e) => handleInputChange('email', e.target.value)}
             className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
@@ -91,9 +123,9 @@ const UpdateStaff = () => {
           <label className="block text-gray-700 pb-2 pt-2">Contact Number</label>
           <input
             type="text"
-            name="contactNumber"
-            value={sampleRowData.contactNumber}
-            onChange={(e) => handleInputChange('contactNumber', e.target.value)}
+            name="contact_number"
+            value={staff.contact_number}
+            onChange={(e) => handleInputChange('contact_number', e.target.value)}
             className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
         </div>
@@ -106,6 +138,8 @@ const UpdateStaff = () => {
           </button>
         </div>
       </form>
+      <ToastContainer />
+
     </div>
   );
 };

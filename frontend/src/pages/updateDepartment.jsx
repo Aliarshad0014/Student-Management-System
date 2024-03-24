@@ -3,20 +3,39 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useParams } from 'react-router-dom';
 
-
 const UpdateDepartment = () => {
-  const [department, setDepartment] = useState([]);
+  const [department, setDepartment] = useState({});
   const { id } = useParams(); // Get the ID from the URL params
 
   // Handle input change
   const handleInputChange = (name, value) => {
-    // Update the sampleRowData state with the new value
-    const updatedRowData = { ...department, [name]: value };
-    setDepartment(updatedRowData);
+    // Update the department state with the new value
+    const updatedDepartment = { ...department, [name]: value };
+    setDepartment(updatedDepartment);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(`http://localhost:5000/api/department/put`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(department)
+      });
+      if (!response.ok) {
+        throw new Error('Failed to update department data');
+      }
+      toast.success('Department updated successfully');
+    } catch (error) {
+      console.error('Error updating department data:', error.message);
+      toast.error('Failed to update department data');
+    }
   };
 
   useEffect(() => {
-    const fetchCourseData = async () => {
+    const fetchDepartmentData = async () => {
       try {
         const response = await fetch(`http://localhost:5000/api/department/${id}`, {
           method: 'GET',
@@ -25,29 +44,28 @@ const UpdateDepartment = () => {
           }
         });
         if (!response.ok) {
-          throw new Error('Failed to fetch Course data');
+          throw new Error('Failed to fetch department data');
         }
         const data = await response.json();
-        console.log("course" + data)
         setDepartment(data);
       } catch (error) {
-        console.error('Error fetching Course data:', error.message);
+        console.error('Error fetching department data:', error.message);
       }
     };
-    fetchCourseData();
+    fetchDepartmentData();
   }, [id]);
 
   return (
     <div className="max-w-lg mx-auto mt-8 mb-8 p-6 bg-purple-100 shadow-md rounded-md text-left">
       <h2 className="text-xl font-semibold mb-4">Update Department Details</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-gray-700 pb-2 pt-2">Department ID</label>
           <input
             type="text"
-            name="departmentId"
+            name="department_id"
             value={department.department_id}
-            onChange={(e) => handleInputChange('departmentId', e.target.value)}
+            onChange={(e) => handleInputChange('department_id', e.target.value)}
             className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
         </div>
@@ -65,9 +83,9 @@ const UpdateDepartment = () => {
           <label className="block text-gray-700 pb-2 pt-2">Contact Number</label>
           <input
             type="text"
-            name="contactNumber"
+            name="contact_number"
             value={department.contact_number}
-            onChange={(e) => handleInputChange('contactNumber', e.target.value)}
+            onChange={(e) => handleInputChange('contact_number', e.target.value)}
             className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
         </div>
@@ -75,9 +93,9 @@ const UpdateDepartment = () => {
           <label className="block text-gray-700 pb-2 pt-2">Head of Department</label>
           <input
             type="text"
-            name="headOfDepartment"
+            name="head_of_department"
             value={department.head_of_department}
-            onChange={(e) => handleInputChange('headOfDepartment', e.target.value)}
+            onChange={(e) => handleInputChange('head_of_department', e.target.value)}
             className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
         </div>
@@ -90,8 +108,10 @@ const UpdateDepartment = () => {
           </button>
         </div>
       </form>
+      <ToastContainer />
     </div>
   );
 };
 
 export default UpdateDepartment;
+

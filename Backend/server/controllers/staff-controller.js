@@ -74,7 +74,7 @@ const staffHandleGetById = async (req, res) => {
 
 const staffHandleDelete = async (req, res) => {
     try {
-        const { staff_id } = req.body;
+        const { staff_id } = req.params;
 
         // Check if the staff member exists
         const existingStaff = await Staff.findOne({ staff_id });

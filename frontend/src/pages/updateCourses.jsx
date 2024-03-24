@@ -109,7 +109,6 @@ const UpdateCourse = () => {
         </div>
       </form>
       <ToastContainer />
-
     </div>
   );
 };

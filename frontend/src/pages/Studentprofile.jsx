@@ -42,7 +42,6 @@ const StudentProfile = ({ fee, documents }) => {
           throw new Error('Failed to fetch fee data');
         }
         const data = await response.json();
-        console.log("fee data" + data.name)
         setFee(data);
       } catch (error) {
         console.error('Error fetching student data:', error.message);
@@ -81,15 +80,13 @@ const StudentProfile = ({ fee, documents }) => {
             <div>
               <h4 className="text-lg font-semibold mb-2 text-red-700">Fee Details</h4>
                 <ul>
-                  {fees.map((fee, index) => (
-                    <li key={index}>
-                      <p className="mb-2">Fee ID : {fee.fee_id}</p>
-                      <p className="mb-2">Amount : {fee.amount}</p>
-                      <p className="mb-2">Month : {fee.month}</p>
-                      <p className="mb-2">Due Date : {fee.due_date}</p>
-                      <p className="mb-2">Status : {fee.paid ? 'Paid' : 'Not Paid'}</p>
+                    <li key={fees.index}>
+                      <p className="mb-2">Fee ID : {fees.fee_id}</p>
+                      <p className="mb-2">Amount : {fees.amount}</p>
+                      <p className="mb-2">Month : {fees.month}</p>
+                      <p className="mb-2">Due Date : {fees.due_date}</p>
+                      <p className="mb-2">Status : {fees.paid ? 'Paid' : 'Not Paid'}</p>
                     </li>
-                  ))}
                 </ul>
 
             </div>

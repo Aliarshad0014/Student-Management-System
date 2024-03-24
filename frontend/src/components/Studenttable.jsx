@@ -1,13 +1,36 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+const StudentsTable = ({ students }) => {
+  const handleDeleteClick = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/student/delete/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
 
-const StudentsTable = ({ students, handleAddClick }) => {
+      if (!response.ok) {
+        throw new Error('Failed to delete student');
+      }
+
+      toast.success('Student deleted successfully!');
+
+     setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    } catch (error) {
+      toast.error('Failed to delete student');
+    }
+  };
 
   return (
     <div className="overflow-x-auto">
       <div className="flex justify-end">
-      <Link to="/add-student" className="bg-green-500 hover:bg-green-600 font-bold text-white px-4 py-2 rounded mb-4">
+        <Link to="/add-student" className="bg-green-500 hover:bg-green-600 font-bold text-white px-4 py-2 rounded mb-4">
           Add Student +
         </Link>
       </div>
@@ -37,15 +60,16 @@ const StudentsTable = ({ students, handleAddClick }) => {
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                 <div className="whitespace-nowrap text-sm text-gray-900">
                   <Link to={`/update-student/${student.student_id}`} className="ml-2 px-2 py-1 font-bold bg-blue-500 hover:bg-blue-600 text-white rounded">Update</Link>
-                  <button className="ml-2 px-2 py-1 font-bold bg-red-500 hover:bg-red-600 text-white rounded">Delete</button>
+                  <button onClick={() => handleDeleteClick(student.student_id)} className="ml-2 px-2 py-1 font-bold bg-red-500 hover:bg-red-600 text-white rounded">Delete</button>
                 </div>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      <ToastContainer />
     </div>
   );
 };
 
-export default StudentsTable; // Exporting the component
+export default StudentsTable;

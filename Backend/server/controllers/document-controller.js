@@ -51,7 +51,7 @@ const documentHandleGetById = async (req, res) => {
 
 const documentHandleDelete = async (req, res) => {
     try {
-        const { document_id } = req.body;
+        const { document_id } = req.params;
 
         // Check if the document exists
         const existingDocument = await Document.findOne({ document_id });

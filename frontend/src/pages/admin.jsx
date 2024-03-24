@@ -12,7 +12,7 @@ import SalaryTable from '../components/Salarytable';
 // AdminPage component
 const AdminPage = ({ campuses, courses, departments, programs, staff, students, fee, salary }) => {
   // Sample data for the system
-  const systemData = ['Campuses', 'Courses', 'Departments', 'Programs', 'Staff', 'Student', 'Fee', 'Salary'];
+  const systemData = [ 'Courses', 'Departments', 'Programs', 'Staff', 'Student', 'Fee', 'Salary'];
 
   // State to store the selected item
   const [selectedItem, setSelectedItem] = useState(null);
