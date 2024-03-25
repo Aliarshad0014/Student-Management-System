@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Departments = ({ departments }) => {
   return (
@@ -12,7 +13,7 @@ const Departments = ({ departments }) => {
         {/* Grid of Departments */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {departments.map((department) => (
-            <button
+            <Link to={`/programs/${department.department_id}`}
               key={department.id}
               className="relative bg-black rounded-md overflow-hidden transition ease-in-out duration-500 transform hover:scale-105 focus:outline-none shadow-md"
               style={{
@@ -24,7 +25,7 @@ const Departments = ({ departments }) => {
                 <h3 className="text-xl font-bold mb-2">{department.name}</h3>
                 <p>{department.details}</p>
               </div>
-            </button>
+            </Link>
           ))}
         </div>
       </main>

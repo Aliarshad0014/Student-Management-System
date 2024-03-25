@@ -276,9 +276,9 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/campuses" element={<Campuses campuses={campuses} />} />
             <Route path="/departments" element={<Departments departments={departments} />} />
-            <Route path="/programs" element={<Programs programs={programs} />} />
-            <Route path="/courses" element={<Courses courses={courses} />} />
-            <Route path="/student-management" element={<StudentManagement students={students} />} />
+            <Route path="/programs/:department_id" element={<Programs programs={programs} />} />
+            <Route path="/courses/:program_id" element={<Courses courses={courses} />} />
+            <Route path="/student-management/:course_id" element={<StudentManagement students={students} studentInCourses={studentInCourses}/>} />
             <Route path="/staff-management" element={<StaffManagement staff={staff} />} />
             <Route path="/student-profile/:id" element={<StudentProfile fee={fee} documents={documents}/>} />
             <Route path="/staff-profile/:id" element={<StaffProfile staff={staff} salary={salary} documents={documents}/>} />

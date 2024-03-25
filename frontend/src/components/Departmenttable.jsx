@@ -46,10 +46,10 @@ const DepartmentTable = ({ departments }) => {
         <tbody className="bg-white divide-y divide-gray-200">
           {departments.map((department, index) => (
             <tr key={index} className='bg-white'>
+              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{department.department_id}</td>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{department.name}</td>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{department.contact_number}</td>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{department.head_of_department}</td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{department.department_id}</td>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                 <div className="whitespace-nowrap text-sm text-gray-900">
                   <Link to={`/update-department/${department.department_id}`} className="ml-2 px-2 py-1 font-bold bg-blue-500 hover:bg-blue-600 text-white rounded">Update</Link>

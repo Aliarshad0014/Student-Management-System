@@ -1,30 +1,35 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const Programs = ({ programs }) => {
-  console.log("programs" + JSON.stringify(programs));
+  const { department_id } = useParams();
+
+  const departmentIdNumber = parseInt(department_id, 10);
+  
+  console.log("department_id", department_id);
+  console.log("Programs", programs);
+
+  // Filter programs based on department_id
+  const filteredPrograms = programs.filter(program => program.department_id === departmentIdNumber);
+
+  console.log("filteredPrograms", filteredPrograms);
+  
   return (
     <div className="flex flex-col h-screen">
-
-      {/* Main Content with margin-top to create space */}
-      <main className="p-4 lg:ml-32 lg:mr-32"> {/* Adjust the mt value based on your header height */}
-        {/* Programs Heading */}
+      <main className="p-4 lg:ml-32 lg:mr-32">
         <h2 className="text-2xl font-bold mb-4 mt-4 text-red-900 text-left">Programs</h2>
-
-        {/* Grid of Programs */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {programs.map((program) => (
-            <Link to={'/courses'}
+          {filteredPrograms.map((program) => (
+            <Link to={`/courses/${program.program_id}`} // Assuming you have a route for individual programs
               key={program.id}
               className="relative bg-black p-4 rounded-md flex flex-col justify-center items-center transition ease-in-out duration-500 transform hover:scale-105 focus:outline-none shadow-md"
               style={{
                 height: '240px',
-                backgroundColor: program.color // Set background color based on program color
+                backgroundColor: program.color
               }}
             > 
-              <h3 className="text-white text-xl font-bold mb-4 z-20">{program.name}</h3> {/* Increase the z-index value */}
-              <hr className="border-b-2 border-white w-14" /> {/* Underline below program name */}
-              {/* <p className="text-white text-sm z-20">{program.details}</p> */}
+              <h3 className="text-white text-xl font-bold mb-4 z-20">{program.name}</h3>
+              <hr className="border-b-2 border-white w-14" />
             </Link>
           ))}
         </div>

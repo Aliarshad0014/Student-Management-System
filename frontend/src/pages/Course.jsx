@@ -1,15 +1,26 @@
 import React, { useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 
 const Courses = ({ courses }) => {
+  const { program_id } = useParams();
+  const programIdNumber = parseInt(program_id, 10);
+
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
 
-  const filteredCourses = courses.filter((course) =>
-    course.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  console.log("courses" + JSON.stringify(courses));
+
+  // const filteredCourses = courses.filter((course) =>
+  //   course.name.toLowerCase().includes(searchTerm.toLowerCase())
+  // );
+
+  const filteredCourses = courses.filter(course => course.program_id === programIdNumber);
+
+  console.log("filteredcourses" + JSON.stringify(filteredCourses));
+
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -31,13 +42,13 @@ const Courses = ({ courses }) => {
         <div className="overflow-y-auto max-h-[500px]">
           <ul className="text-left">
             {filteredCourses.map((course) => (
-              <li
+              <Link to={`/student-management/${course.course_id}`}
                 key={course.id}
                 className="p-4 mb-2 bg-white rounded-md cursor-pointer shadow-md hover:bg-red-50 transition duration-300 ease-in-out"
               >
                 <h3 className="text-lg font-semibold mb-2">{course.name}</h3>
                 <p>{course.description}</p>
-              </li>
+              </Link>
             ))}
           </ul>
         </div>
