@@ -43,7 +43,7 @@ const StaffManagement = ({ staff }) => {
               <li key={staffMember.id} className="py-3 text-left">
                 <Link to={`/staff-profile/${staffMember.staff_id}`} className="hover:underline">
                   <div>
-                    <h3 className="text-md font-semibold">{staffMember.name}</h3>
+                    <h3 className="text-md font-semibold">{staffMember.staff_id} - {staffMember.name}</h3>
                     {/* Additional staff details can be added here */}
                   </div>
                 </Link>

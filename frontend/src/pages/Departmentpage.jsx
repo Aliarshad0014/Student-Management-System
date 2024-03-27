@@ -23,6 +23,7 @@ const Departments = ({ departments }) => {
               <div className="h-1/2 bg-cover" style={{ backgroundImage: `url(${department.image})`}}></div>
               <div className="flex flex-col justify-center items-center h-1/2 p-4 bg-white text-black">
                 <h3 className="text-xl font-bold mb-2">{department.name}</h3>
+                <h3 className="text-xs">Department ID: {department.department_id}</h3>
                 <p>{department.details}</p>
               </div>
             </Link>

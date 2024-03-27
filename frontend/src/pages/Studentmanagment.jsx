@@ -57,7 +57,7 @@ const StudentManagement = ({ students, studentInCourses }) => {
                 {/* Link to StudentProfile with student's details */}
                 <Link to={`/student-profile/${student.student_id}`} className="hover:underline">
                   <div>
-                    <h3 className="text-md font-semibold">{student.name}</h3>
+                    <h3 className="text-md font-semibold">{student.student_id} - {student.name}</h3>
                     {/* Additional student details can be added here */}
                   </div>
                 </Link>

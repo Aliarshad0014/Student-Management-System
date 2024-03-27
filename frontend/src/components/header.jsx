@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Header() {
     const headerStyle = {
@@ -21,11 +22,11 @@ function Header() {
                 </div>
                 <nav className="hidden md:hidden lg:flex">
                     <ul className="flex space-x-10 text-black text-lg font-light">
-                        <li>
+                        {/* <li>
                             <a href="/admin" className="hover:text-red-600 ease-in-out duration-300">
                                 Admin
                             </a>
-                        </li>
+                        </li> */}
                         <li>
                             <a href="/Courses" className="hover:text-red-600 ease-in-out duration-300">
                                 Courses
@@ -43,9 +44,9 @@ function Header() {
                         </li>
                     </ul>
                 </nav>
-                <button className="bg-gradient-to-b rounded-sm text-black from-red-600 to-red-600 p-2 px-6 hover:from-red-700 hover:to-red-700 hover:scale-105 transition-all ease-in-out duration-300  flex items-center justify-center w-28 hover:text-white">
-                    Login
-                </button>
+                <Link to="/admin" className="bg-gradient-to-b rounded-sm text-black from-red-600 to-red-600 p-2 px-6 hover:from-red-700 hover:to-red-700 hover:scale-105 transition-all ease-in-out duration-300  flex items-center justify-center w-28 hover:text-white">
+                    Admin
+                </Link>
             </div>
         </header>
     );

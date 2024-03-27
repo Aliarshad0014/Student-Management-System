@@ -31,6 +31,9 @@ import AddSalary from './pages/addSalary';
 import UpdateSalary from './pages/updateSalary';
 import UpdateFee from './pages/updateFee';
 import AddFee from './pages/addFee';
+import AllPrograms from './pages/AllPrograms';
+import AllStudents from './pages/AllStudents';
+import AllCourses from './pages/AllCourses';
 
 function App() {
   const [studentInCourses, setstudentInCourses] = useState([]);
@@ -277,8 +280,11 @@ function App() {
             <Route path="/campuses" element={<Campuses campuses={campuses} />} />
             <Route path="/departments" element={<Departments departments={departments} />} />
             <Route path="/programs/:department_id" element={<Programs programs={programs} />} />
+            <Route path="/programs/" element={<AllPrograms programs={programs} />} />
             <Route path="/courses/:program_id" element={<Courses courses={courses} />} />
+            <Route path="/courses/" element={<AllCourses courses={courses} />} />
             <Route path="/student-management/:course_id" element={<StudentManagement students={students} studentInCourses={studentInCourses}/>} />
+            <Route path="/student-management/" element={<AllStudents students={students}/>} />
             <Route path="/staff-management" element={<StaffManagement staff={staff} />} />
             <Route path="/student-profile/:id" element={<StudentProfile fee={fee} documents={documents}/>} />
             <Route path="/staff-profile/:id" element={<StaffProfile staff={staff} salary={salary} documents={documents}/>} />

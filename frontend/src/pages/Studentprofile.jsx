@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-const StudentProfile = ({ fee, documents }) => {
+const StudentProfile = () => {
   const [student, setStudent] = useState([]);
-  const [fees, setFee] = useState([]);
+  const [fees, setFee] = useState({fee_id:"", student_id:"", amount:"", month:"", due_date:"", paid:""});
   const { id } = useParams(); // Get the ID from the URL params
 
   useEffect(() => {

@@ -1,22 +1,16 @@
 import React, { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import {Link} from 'react-router-dom'; 
 
-const Courses = ({ courses }) => {
-  const { program_id } = useParams();
-  const programIdNumber = parseInt(program_id, 10);
+const AllCourses = ({courses}) => {
+    const [searchTerm, setSearchTerm] = useState('');
 
-  const [searchTerm, setSearchTerm] = useState('');
-
-  const handleSearch = (event) => {
-    setSearchTerm(event.target.value);
-  };
-
-  console.log("courses" + JSON.stringify(courses));
-
-  const filteredCourses = courses.filter(course => course.program_id === programIdNumber);
-
-  console.log("filteredcourses" + JSON.stringify(filteredCourses));
-
+    const handleSearch = (event) => {
+      setSearchTerm(event.target.value);
+    };
+  
+    const filteredCourses = courses.filter((course) =>
+      course.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -42,15 +36,15 @@ const Courses = ({ courses }) => {
                 key={course.id}
                 className="block p-4 mb-2 bg-white rounded-md cursor-pointer shadow-md hover:bg-red-50 transition duration-300 ease-in-out"
               >
-                <h3 className="text-lg font-semibold mb-2">{course.course_id} - {course.name}</h3>
-              
+                <h3 className="text-lg font-semibold mb-2"> {course.course_id} - {course.name}</h3>
+                <p>{course.description}</p>
               </Link>
             ))}
           </ul>
         </div>
       </main>
     </div>
-  );
-};
+  )
+}
 
-export default Courses;
+export default AllCourses

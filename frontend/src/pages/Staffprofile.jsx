@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-const StaffProfile = ({ salary, documents }) => {
+const StaffProfile = () => {
   const [staff, setStaffData] = useState([]);
   const [salaries, setSalary] = useState({});
 
@@ -82,14 +82,12 @@ const StaffProfile = ({ salary, documents }) => {
             <div>
               <h4 className="text-lg font-semibold mb-2  text-red-700">Salary Details</h4>
               <ul>
-                {/* {salaries.map((salary, index) => ( */}
                   <li key={salaries.index}>
                     <p className="mb-2">Salary ID : {salaries.salary_id}</p>
                     <p className="mb-2">Month : {salaries.month}</p>
                     <p className="mb-2">Amount : {salaries.amount}</p>
                     <p className="mb-2">Status : {salaries.paid ? 'Paid' : 'Not Paid'}</p>
                   </li>
-                {/* ))} */}
               </ul>
             </div>
           </div>
