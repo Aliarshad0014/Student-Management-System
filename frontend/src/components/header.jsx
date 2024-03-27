@@ -22,11 +22,6 @@ function Header() {
                 <nav className="hidden md:hidden lg:flex">
                     <ul className="flex space-x-10 text-black text-lg font-light">
                         <li>
-                            <a href="/Courses" className="hover:text-red-600 ease-in-out duration-300">
-                                Courses
-                            </a>
-                        </li>
-                        <li>
                             <a href="/Departments" className="hover:text-red-600 ease-in-out duration-300">
                                 Departments
                             </a>
@@ -34,6 +29,11 @@ function Header() {
                         <li>
                             <a href="/Programs" className="hover:text-red-600 ease-in-out duration-300">
                                 Programs
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Courses" className="hover:text-red-600 ease-in-out duration-300">
+                                Courses
                             </a>
                         </li>
                         <li>
