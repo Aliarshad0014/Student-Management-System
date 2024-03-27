@@ -52,7 +52,6 @@ const studentincoursesTable = ({ studentInCourses, onDeleteClick }) => {
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{studentincourse.course_id}</td>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                 <div className="whitespace-nowrap text-sm text-gray-900 flex justify-end">
-                  {/* <Link to={`/update-studentincourse/${studentincourse.student_id}`} className="ml-2 px-2 py-1 font-bold bg-blue-500 hover:bg-blue-600 text-white rounded">Update</Link> */}
                   <button onClick={() => handleDeleteClick(studentincourse.student_id)} className="ml-2 px-2 py-1 font-bold bg-red-500 hover:bg-red-600 text-white rounded">Delete</button>
                 </div>
               </td>
