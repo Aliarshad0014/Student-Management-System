@@ -6,7 +6,6 @@ const AddStudent = () => {
     // Define initial state for input values
     const [inputValues, setInputValues] = useState({
         student_id: '',
-        campus_id: '',
         program_id: '',
         department_id: '',
         name: '',
@@ -38,7 +37,6 @@ const AddStudent = () => {
             // Optionally, reset the form fields
             setInputValues({
                 student_id: '',
-                campus_id: '',
                 program_id: '',
                 department_id: '',
                 name: '',
@@ -60,16 +58,6 @@ const AddStudent = () => {
                         type="text"
                         name="student_id"
                         value={inputValues.student_id}
-                        onChange={handleInputChange}
-                        className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                    />
-                </div>
-                <div className="mb-4">
-                    <label className="block text-gray-700">Campus ID</label>
-                    <input
-                        type="text"
-                        name="campus_id"
-                        value={inputValues.campus_id}
                         onChange={handleInputChange}
                         className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     />

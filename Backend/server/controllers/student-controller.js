@@ -1,18 +1,10 @@
 const Student = require("../models/student-model");
-const Campus = require("../models/campus-model");
 const Program = require("../models/program-model");
 const Department = require("../models/department-model");
 
 const student = async (req, res) => {
     try {
-        const { student_id, campus_id, program_id, department_id, name, email, contact_number } = req.body;
-
-        // Check if the campus with the given ID exists
-        const existingCampus = await Campus.findOne({ campus_id: campus_id });
-
-        if (!existingCampus) {
-            return res.status(400).send('Campus with the given ID does not exist');
-        }
+        const { student_id, program_id, department_id, name, email, contact_number } = req.body;
 
         // Check if the program with the given ID exists
         const existingProgram = await Program.findOne({ program_id: program_id });
@@ -43,7 +35,7 @@ const student = async (req, res) => {
         }
 
         // If the campus, program, department, and student do not exist, create a new student
-        await Student.create({ student_id, campus_id, program_id, department_id, name, email, contact_number });
+        await Student.create({ student_id, program_id, department_id, name, email, contact_number });
 
         res.status(200).send(req.body);
     } catch (error) {
@@ -104,14 +96,7 @@ const studentHandleDelete = async (req, res) => {
 
 const studentHandleUpdate = async (req, res) => {
     try {
-        const { student_id, campus_id, program_id, department_id, name, email, contact_number } = req.body;
-
-        // Check if the campus with the given ID exists
-        const existingCampus = await Campus.findOne({ campus_id });
-
-        if (!existingCampus) {
-            return res.status(400).send('Campus with the given ID does not exist');
-        }
+        const { student_id, program_id, department_id, name, email, contact_number } = req.body;
 
         // Check if the program with the given ID exists
         const existingProgram = await Program.findOne({ program_id });
@@ -154,6 +139,7 @@ const studentHandleUpdate = async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 };
+
 
 module.exports = {
     student,

@@ -29,7 +29,8 @@ const Programs = ({ programs }) => {
               }}
             > 
               <h3 className="text-white text-xl font-bold mb-4 z-20">{program.name}</h3>
-              <hr className="border-b-2 border-white w-14" />
+              <hr className="border-b-2 border-white w-14 mb-4" />
+              <p className="text-white text-xs">Program ID: {program.program_id}</p>
             </Link>
           ))}
         </div>

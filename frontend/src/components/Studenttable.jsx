@@ -38,8 +38,7 @@ const StudentsTable = ({ students }) => {
         <thead className="bg-gray-50">
           <tr>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Student ID</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Campus ID</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Program ID</th>
+           <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Program ID</th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Department ID</th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Name</th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Email</th>
@@ -51,7 +50,6 @@ const StudentsTable = ({ students }) => {
           {students.map((student, index) => (
             <tr key={index} className='bg-white'>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{student.student_id}</td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{student.campus_id}</td>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{student.program_id}</td>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{student.department_id}</td>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{student.name}</td>

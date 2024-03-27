@@ -37,8 +37,7 @@ const StaffTable = ({ staff }) => {
         <thead className="bg-gray-50">
           <tr>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Staff ID</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Campus ID</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Department ID</th>
+           <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Department ID</th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Name</th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Designation</th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Email</th>
@@ -50,7 +49,6 @@ const StaffTable = ({ staff }) => {
           {staff.map((staff, index) => (
             <tr key={index} className='bg-white'>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{staff.staff_id}</td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{staff.campus_id}</td>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{staff.department_id}</td>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{staff.name}</td>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{staff.designation}</td>

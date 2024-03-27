@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import CampusesTable from '../components/CampusesTable';
 import CoursesTable from '../components/coursestable';
 import DepartmentTable from '../components/Departmenttable';
 import ProgramTable from '../components/Programtable';
@@ -7,12 +6,12 @@ import StaffTable from '../components/Stafftable';
 import StudentsTable from '../components/Studenttable';
 import FeeTable from '../components/Feetable';
 import SalaryTable from '../components/Salarytable';
-
+import StudentcoursesTable from '../components/studentincoursestable';
 
 // AdminPage component
-const AdminPage = ({ campuses, courses, departments, programs, staff, students, fee, salary }) => {
+const AdminPage = ({courses, departments, programs, staff, students, fee, salary, studentInCourses }) => {
   // Sample data for the system
-  const systemData = [ 'Courses', 'Departments', 'Programs', 'Staff', 'Student', 'Fee', 'Salary'];
+  const systemData = [ 'Courses', 'Departments', 'Programs', 'Staff', 'Student', 'Fee', 'Salary', "Student Courses"];
 
   // State to store the selected item
   const [selectedItem, setSelectedItem] = useState(null);
@@ -25,8 +24,6 @@ const AdminPage = ({ campuses, courses, departments, programs, staff, students, 
   // Render the selected table based on the selectedItem
   const renderTable = () => {
     switch (selectedItem) {
-      case 'Campuses':
-        return <CampusesTable campuses={campuses} />;
       case 'Courses':
         return <CoursesTable courses={courses} />;
       case 'Departments':
@@ -41,6 +38,8 @@ const AdminPage = ({ campuses, courses, departments, programs, staff, students, 
         return <FeeTable fees={fee}/>;
         case 'Salary':
         return <SalaryTable salaries={salary}/>;
+        case 'Student Courses':
+          return <StudentcoursesTable studentInCourses={studentInCourses}/>;
       default:
         return null;
     }

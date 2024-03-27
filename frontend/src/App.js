@@ -28,6 +28,7 @@ import AddSalary from './pages/addSalary';
 import UpdateSalary from './pages/updateSalary';
 import UpdateFee from './pages/updateFee';
 import AddFee from './pages/addFee';
+import Addstudentincourses from './pages/addstudentincourses';
 import AllPrograms from './pages/AllPrograms';
 import AllStudents from './pages/AllStudents';
 import AllCourses from './pages/AllCourses';
@@ -109,29 +110,7 @@ function App() {
     };
     fetchData();
   }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('http://localhost:5000/api/document/all', {
-          method: "GET",
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        });
-        if (!response.ok) {
-          throw new Error('Failed to fetch data');
-        }
-        const data = await response.json();
-        setDocuments(data);
-        console.log(data)
-      } catch (error) {
-        console.error('Error fetching student in document data:', error.message);
-      }
-    };
-    fetchData();
-  }, []);
-
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -261,7 +240,7 @@ function App() {
             <Route path="/staff-management" element={<StaffManagement staff={staff} />} />
             <Route path="/student-profile/:id" element={<StudentProfile fee={fee} documents={documents}/>} />
             <Route path="/staff-profile/:id" element={<StaffProfile staff={staff} salary={salary} documents={documents}/>} />
-            <Route path="/admin" element={<AdminPage courses={courses} departments={departments} documents={documents} programs={programs} staff={staff} students={students} fee={fee} salary={salary}/>} />
+            <Route path="/admin" element={<AdminPage courses={courses} departments={departments} documents={documents} programs={programs} staff={staff} students={students} fee={fee} salary={salary} studentInCourses={studentInCourses}/>} />
             <Route path="/update-course/:id" element={<UpdateCourse />} />
             <Route path="/update-department/:id" element={<UpdateDepartment />} />
             <Route path="/update-program/:id" element={<UpdateProgram />} />
@@ -276,6 +255,7 @@ function App() {
             <Route path="/add-staff" element={<AddStaff />} />
             <Route path="/add-salary" element={<AddSalary />} />
             <Route path="/add-fee" element={<AddFee />} />
+            <Route path="/add-studentincourses" element={<Addstudentincourses/>} />
           </Routes>
         </div>
         <Footer />
@@ -285,6 +265,3 @@ function App() {
 }
 
 export default App;
-
-// import FinancePage from './pages/Financepage';
-// {/* <FinancePage/> */} kicked out page

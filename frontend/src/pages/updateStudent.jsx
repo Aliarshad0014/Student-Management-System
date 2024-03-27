@@ -70,16 +70,6 @@ const UpdateStudent = () => {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 pb-2 pt-2">Campus ID</label>
-          <input
-            type="text"
-            name="campus_id"
-            value={student.campus_id}
-            onChange={(e) => handleInputChange('campus_id', e.target.value)}
-            className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
-          />
-        </div>
-        <div className="mb-4">
           <label className="block text-gray-700 pb-2 pt-2">Program ID</label>
           <input
             type="text"

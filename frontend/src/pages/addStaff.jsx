@@ -6,7 +6,6 @@ const AddStaff = () => {
     // Define initial state for input values
     const [inputValues, setInputValues] = useState({
         staff_id: '',
-        campus_id: '',
         program_id: '',
         department_id: '',
         name: '',
@@ -39,7 +38,6 @@ const AddStaff = () => {
             // Optionally, reset the form fields
             setInputValues({
                 staff_id: '',
-                campus_id: '',
                 program_id: '',
                 department_id: '',
                 name: '',
@@ -78,16 +76,6 @@ const AddStaff = () => {
                     />
                 </div>
                 {/* End of Designation Field */}
-                <div className="mb-4">
-                    <label className="block text-gray-700">Campus ID</label>
-                    <input
-                        type="text"
-                        name="campus_id"
-                        value={inputValues.campus_id}
-                        onChange={handleInputChange}
-                        className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                    />
-                </div>
                 <div className="mb-4">
                     <label className="block text-gray-700">Program ID</label>
                     <input

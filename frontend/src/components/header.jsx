@@ -7,7 +7,7 @@ function Header() {
         position: 'relative',
         width: '100%',
         zIndex: 10,
-     };
+    };
 
     return (
         <header
@@ -22,11 +22,6 @@ function Header() {
                 </div>
                 <nav className="hidden md:hidden lg:flex">
                     <ul className="flex space-x-10 text-black text-lg font-light">
-                        {/* <li>
-                            <a href="/admin" className="hover:text-red-600 ease-in-out duration-300">
-                                Admin
-                            </a>
-                        </li> */}
                         <li>
                             <a href="/Courses" className="hover:text-red-600 ease-in-out duration-300">
                                 Courses
@@ -42,11 +37,16 @@ function Header() {
                                 Programs
                             </a>
                         </li>
+                        <li>
+                            <a href="/admin" className="hover:text-red-800 ease-in-out duration-300 text-red-500 inline-block transform transition-transform hover:scale-110">
+                                Admin
+                            </a>
+                        </li>
                     </ul>
                 </nav>
-                <Link to="/admin" className="bg-gradient-to-b rounded-sm text-black from-red-600 to-red-600 p-2 px-6 hover:from-red-700 hover:to-red-700 hover:scale-105 transition-all ease-in-out duration-300  flex items-center justify-center w-28 hover:text-white">
+                {/* <Link to="/admin" className="bg-gradient-to-b rounded-sm text-black from-red-600 to-red-600 p-2 px-6 hover:from-red-700 hover:to-red-700 hover:scale-105 transition-all ease-in-out duration-300  flex items-center justify-center w-28 hover:text-white">
                     Admin
-                </Link>
+                </Link> */}
             </div>
         </header>
     );
