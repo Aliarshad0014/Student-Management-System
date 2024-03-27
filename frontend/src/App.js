@@ -2,7 +2,6 @@ import './App.css';
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Footer from './components/footer';
 import Header from './components/header';
-import Campuses from './pages/Campusespage';
 import Landingpage from "./pages/Landingpage"
 import Login from "./pages/Login"
 import Departments from './pages/Departmentpage';
@@ -13,8 +12,6 @@ import StaffManagement from './pages/Staffmanagment';
 import StudentProfile from './pages/Studentprofile';
 import StaffProfile from './pages/Staffprofile';
 import AdminPage from './pages/admin';
-import UpdatePage from './pages/updatePage';
-import AddPage from './pages/addPage';
 import Register from './pages/Register';
 import { useState, useEffect } from 'react';
 import AddCourses from './pages/addCourses';
@@ -37,7 +34,6 @@ import AllCourses from './pages/AllCourses';
 
 function App() {
   const [studentInCourses, setstudentInCourses] = useState([]);
-  const [campuses, setCampuses] = useState([]);
   const [courses, setCourses] = useState([]);
   const [departments, setDepartments] = useState([]);
   const [documents, setDocuments] = useState([]);
@@ -65,28 +61,6 @@ function App() {
         console.log(data)
       } catch (error) {
         console.error('Error fetching student in studentincourses data:', error.message);
-      }
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('http://localhost:5000/api/campus/all', {
-          method: "GET",
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        });
-        if (!response.ok) {
-          throw new Error('Failed to fetch data');
-        }
-        const data = await response.json();
-        setCampuses(data);
-        console.log(data)
-      } catch (error) {
-        console.error('Error fetching student in campus data:', error.message);
       }
     };
     fetchData();
@@ -277,7 +251,6 @@ function App() {
             <Route path="/" element={<Landingpage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/campuses" element={<Campuses campuses={campuses} />} />
             <Route path="/departments" element={<Departments departments={departments} />} />
             <Route path="/programs/:department_id" element={<Programs programs={programs} />} />
             <Route path="/programs/" element={<AllPrograms programs={programs} />} />
@@ -288,8 +261,7 @@ function App() {
             <Route path="/staff-management" element={<StaffManagement staff={staff} />} />
             <Route path="/student-profile/:id" element={<StudentProfile fee={fee} documents={documents}/>} />
             <Route path="/staff-profile/:id" element={<StaffProfile staff={staff} salary={salary} documents={documents}/>} />
-            <Route path="/admin" element={<AdminPage campuses={campuses} courses={courses} departments={departments} documents={documents} programs={programs} staff={staff} students={students} fee={fee} salary={salary}/>} />
-            <Route path="/update-campus" element={<UpdatePage />} />
+            <Route path="/admin" element={<AdminPage courses={courses} departments={departments} documents={documents} programs={programs} staff={staff} students={students} fee={fee} salary={salary}/>} />
             <Route path="/update-course/:id" element={<UpdateCourse />} />
             <Route path="/update-department/:id" element={<UpdateDepartment />} />
             <Route path="/update-program/:id" element={<UpdateProgram />} />
@@ -297,7 +269,6 @@ function App() {
             <Route path="/update-student/:id" element={<UpdateStudent />} />
             <Route path="/update-salary/:id" element={<UpdateSalary />} />
             <Route path="/update-fee/:id" element={<UpdateFee />} />
-            <Route path="/add-campuses" element={<AddPage />} />
             <Route path="/add-courses" element={<AddCourses />} />
             <Route path="/add-departments" element={<AddDepartments />} />
             <Route path="/add-program" element={<AddPrograms />} />
