@@ -26,7 +26,7 @@ const UpdateCourse = () => {
       });
       if (!response.ok) {
         const errorMessage = await response.text();
-        throw new Error(errorMessage);  
+        throw new Error(errorMessage);
       }
       toast.success('Course updated successfully');
     } catch (error) {
@@ -66,7 +66,8 @@ const UpdateCourse = () => {
             name="course_id"
             value={course.course_id}
             onChange={(e) => handleInputChange('course_id', e.target.value)}
-            className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            className="block w-full mt-1 p-4 rounded-md shadow-sm disabled:opacity-60 disabled:bg-gray-300"
+            disabled
           />
         </div>
         <div className="mb-4">

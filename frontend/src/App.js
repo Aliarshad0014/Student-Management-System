@@ -14,7 +14,6 @@ import StaffManagement from './pages/Staffmanagment';
 import StudentProfile from './pages/Studentprofile';
 import StaffProfile from './pages/Staffprofile';
 import AdminPage from './pages/admin';
-import Register from './pages/Register';
 import AddCourses from './pages/addCourses';
 import AddDepartments from './pages/addDepartments';
 import AddPrograms from './pages/addProgram';
@@ -281,7 +280,6 @@ function App() {
           <Routes>
             <Route path="/login" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} /> 
             <Route path="/" element={<Landingpage />} />
-            <Route path="/register" element={<Register />} />
             <Route path="/departments" element={<Departments departments={departments} />} />
             <Route path="/programs/:department_id" element={<Programs programs={programs} />} />
             <Route path="/programs/" element={<AllPrograms programs={programs} />} />

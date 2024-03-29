@@ -67,8 +67,8 @@ const UpdateStaff = () => {
             name="staff_id"
             value={staff.staff_id}
             onChange={(e) => handleInputChange('staff_id', e.target.value)}
-            className="block w-full mt-1 p-4 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
-          />
+            className="block w-full mt-1 p-4 rounded-md shadow-sm disabled:opacity-60 disabled:bg-gray-300"
+            disabled          />
         </div>
         <div className="mb-4">
           <label className="block text-gray-700 pb-2 pt-2">Department ID</label>

@@ -69,7 +69,6 @@ const StudentProfile = () => {
             <p className="mb-2">Student ID : {student.student_id}</p>
             <p className="mb-2">Contact Number : {student.contact_number}</p>
             <p className="mb-2">Email : {student.email}</p>
-            <p className="mb-2">Campus : {student.campus_id}</p>
             <p className="mb-2">Program : {student.program_id}</p>
             <p className="mb-2">Department : {student.department_id}</p>
 

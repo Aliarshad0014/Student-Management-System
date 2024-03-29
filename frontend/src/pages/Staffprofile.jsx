@@ -72,7 +72,6 @@ const StaffProfile = () => {
             <p className="mb-2">Contact Number : {staff.contact_number}</p>
             <p className="mb-2">Email : {staff.email}</p>
             <p className="mb-2">Designation : {staff.designation}</p>
-            <p className="mb-2">Campus : {staff.campus_id}</p>
             <p className="mb-2">Department : {staff.department_id}</p>
 
             {/* Horizontal Line */}
