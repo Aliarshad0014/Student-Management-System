@@ -25,12 +25,13 @@ const UpdateStaff = () => {
         body: JSON.stringify(staff)
       });
       if (!response.ok) {
-        throw new Error('Failed to update staff data');
-      }
+        const errorMessage = await response.text();
+        throw new Error(errorMessage); 
+            }
       toast.success('Staff updated successfully');
     } catch (error) {
-      console.error('Error updating staff data:', error.message);
-      toast.error('Failed to update staff data');
+      toast.error(error.message); // Display error message in toast
+
     }
   };
 

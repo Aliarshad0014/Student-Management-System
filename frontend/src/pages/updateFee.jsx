@@ -25,12 +25,12 @@ const UpdateFee = () => {
         body: JSON.stringify(fee)
       });
       if (!response.ok) {
-        throw new Error('Failed to update fee data');
+        const errorMessage = await response.text();
+        throw new Error(errorMessage);  
       }
       toast.success('Fee updated successfully');
     } catch (error) {
-      console.error('Error updating fee data:', error.message);
-      toast.error('Failed to update fee data');
+      toast.error(error.message); // Display error message in toast
     }
   };
 

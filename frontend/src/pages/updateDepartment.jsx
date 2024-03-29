@@ -25,12 +25,12 @@ const UpdateDepartment = () => {
         body: JSON.stringify(department)
       });
       if (!response.ok) {
-        throw new Error('Failed to update department data');
-      }
+        const errorMessage = await response.text();
+        throw new Error(errorMessage);  
+            }
       toast.success('Department updated successfully');
     } catch (error) {
-      console.error('Error updating department data:', error.message);
-      toast.error('Failed to update department data');
+      toast.error(error.message); // Display error message in toast
     }
   };
 

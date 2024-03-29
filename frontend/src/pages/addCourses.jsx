@@ -19,30 +19,34 @@ const AddCourses = () => {
 
     // Handle form submission
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await fetch('http://localhost:5000/api/course/post', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(inputValues)
-            });
-            if (!response.ok) {
-                throw new Error('Failed to add course');
-            }
-            toast.success('Course added successfully!');
-            // Optionally, reset the form fields
-            setInputValues({
-                course_id: '',
-                program_id: '',
-                name: '',
-                credits: ''
-            });
-        } catch (error) {
-            toast.error('Failed to add Course');        
+    e.preventDefault();
+    try {
+        const response = await fetch('http://localhost:5000/api/course/post', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(inputValues)
+        });
+
+        if (!response.ok) {
+            // Extract error message from response
+            const errorMessage = await response.text();
+            throw new Error(errorMessage);
         }
-    };
+
+        toast.success('Course added successfully!');
+        // Optionally, reset the form fields
+        setInputValues({
+            course_id: '',
+            program_id: '',
+            name: '',
+            credits: ''
+        });
+    } catch (error) {
+        toast.error(error.message); // Display error message in toast
+    }
+};
 
     return (
         <div className="max-w-lg mx-auto mb-8 mt-8 p-6 bg-purple-100 shadow-md rounded-md text-left">

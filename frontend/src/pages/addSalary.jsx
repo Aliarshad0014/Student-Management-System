@@ -30,7 +30,8 @@ const AddSalary = () => {
                 body: JSON.stringify(inputValues)
             });
             if (!response.ok) {
-                throw new Error('Failed to add salary');
+                const errorMessage = await response.text();
+                throw new Error(errorMessage);  
             }
             toast.success('Salary added successfully!');
             // Optionally, reset the form fields
@@ -42,7 +43,7 @@ const AddSalary = () => {
                 paid: ''
             });
         } catch (error) {
-            toast.error('Failed to add Salary');        
+            toast.error(error.message); // Display error message in toast
         }
     };
 

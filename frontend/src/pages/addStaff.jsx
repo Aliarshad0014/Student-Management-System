@@ -32,7 +32,8 @@ const AddStaff = () => {
                 body: JSON.stringify(inputValues)
             });
             if (!response.ok) {
-                throw new Error('Failed to add staff');
+                const errorMessage = await response.text();
+                throw new Error(errorMessage);  
             }
             toast.success('Staff added successfully!');
             // Optionally, reset the form fields
@@ -46,7 +47,7 @@ const AddStaff = () => {
                 designation: '' // Reset designation field
             });
         } catch (error) {
-            toast.error('Failed to add Staff');        
+            toast.error(error.message); // Display error message in toast
         }
     };
 

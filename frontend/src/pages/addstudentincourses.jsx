@@ -27,8 +27,9 @@ const Addstudentincourses = () => {
                 body: JSON.stringify(inputValues)
             });
             if (!response.ok) {
-                throw new Error('Failed to add Student in course');
-            }
+                const errorMessage = await response.text();
+                throw new Error(errorMessage);  
+                        }
             toast.success('Student in course added successfully!');
             // Optionally, reset the form fields
             setInputValues({
@@ -36,7 +37,7 @@ const Addstudentincourses = () => {
                 course_id: '',
             });
         } catch (error) {
-            toast.error('Failed to add Student in course');        
+            toast.error(error.message); // Display error message in toast
         }
     };
 

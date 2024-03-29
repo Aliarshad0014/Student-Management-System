@@ -10,7 +10,7 @@ const Login = ({isLoggedIn, setIsLoggedIn}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Compare the entered password with the hardcoded one
-    if (password === 'Aliarshad') {
+    if (password === 'aliarshad') {
       setIsLoggedIn(true);
       // Store login state in localStorage
       localStorage.setItem('isLoggedIn', 'true');

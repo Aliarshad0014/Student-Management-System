@@ -31,8 +31,9 @@ const AddFee = () => {
                 body: JSON.stringify(inputValues)
             });
             if (!response.ok) {
-                throw new Error('Failed to add fee');
-            }
+                const errorMessage = await response.text();
+                throw new Error(errorMessage);  
+                      }
             toast.success('Fee added successfully!');
             // Optionally, reset the form fields
             setInputValues({
@@ -44,7 +45,7 @@ const AddFee = () => {
                 paid: ''
             });
         } catch (error) {
-            toast.error('Failed to add Fee');        
+            toast.error(error.message); // Display error message in toast
         }
     };
 

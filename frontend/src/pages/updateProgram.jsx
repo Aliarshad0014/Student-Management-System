@@ -25,12 +25,13 @@ const UpdateProgram = () => {
         body: JSON.stringify(program)
       });
       if (!response.ok) {
-        throw new Error('Failed to update program data');
-      }
+        const errorMessage = await response.text();
+        throw new Error(errorMessage);  
+            }
       toast.success('Program updated successfully');
     } catch (error) {
-      console.error('Error updating program data:', error.message);
-      toast.error('Failed to update program data');
+      toast.error(error.message); // Display error message in toast
+
     }
   };
 

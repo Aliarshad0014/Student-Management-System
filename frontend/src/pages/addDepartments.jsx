@@ -29,7 +29,8 @@ const AddDepartments = () => {
                 body: JSON.stringify(inputValues)
             });
             if (!response.ok) {
-                throw new Error('Failed to add department');
+                const errorMessage = await response.text();
+                throw new Error(errorMessage);
             }
             toast.success('Department added successfully!');
             // Optionally, reset the form fields
@@ -40,7 +41,7 @@ const AddDepartments = () => {
                 head_of_department: ''
             });
         } catch (error) {
-            toast.error('Failed to add Department');        
+            toast.error(error.message); // Display error message in toast
         }
     };
 

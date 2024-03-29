@@ -25,12 +25,13 @@ const UpdateStudent = () => {
         body: JSON.stringify(student)
       });
       if (!response.ok) {
-        throw new Error('Failed to update student data');
-      }
+        const errorMessage = await response.text();
+        throw new Error(errorMessage); 
+            }
       toast.success('Student updated successfully');
     } catch (error) {
-      console.error('Error updating student data:', error.message);
-      toast.error('Failed to update student data');
+      toast.error(error.message); // Display error message in toast
+
     }
   };
 

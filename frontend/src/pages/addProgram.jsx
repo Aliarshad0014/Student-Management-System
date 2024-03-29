@@ -29,7 +29,8 @@ const AddPrograms = () => {
                 body: JSON.stringify(inputValues)
             });
             if (!response.ok) {
-                throw new Error('Failed to add program');
+                const errorMessage = await response.text();
+                throw new Error(errorMessage);  
             }
             toast.success('Program added successfully!');
             // Optionally, reset the form fields
@@ -40,7 +41,7 @@ const AddPrograms = () => {
                 awarding_body: ''
             });
         } catch (error) {
-            toast.error('Failed to add Program');        
+            toast.error(error.message); // Display error message in toast
         }
     };
 

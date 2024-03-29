@@ -25,12 +25,12 @@ const UpdateSalary = () => {
         body: JSON.stringify(salaryData)
       });
       if (!response.ok) {
-        throw new Error('Failed to update salary data');
+        const errorMessage = await response.text();
+        throw new Error(errorMessage);  
       }
       toast.success('Salary data updated successfully');
     } catch (error) {
-      console.error('Error updating salary data:', error.message);
-      toast.error('Failed to update salary data');
+      toast.error(error.message); // Display error message in toast
     }
   };
 
