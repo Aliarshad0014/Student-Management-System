@@ -32,7 +32,7 @@ const studentincoursesTable = ({ studentInCourses, onDeleteClick }) => {
     <div className="overflow-x-auto">
       <div className="flex justify-end">
         <Link to="/add-studentincourses" className="bg-green-500 hover:bg-green-600 text-white font-bold px-4 py-2 rounded mb-4">
-          Add Student In Course +
+          Enroll Student in Course +
         </Link>
       </div>
       <table className="min-w-full divide-y divide-gray-200">
@@ -60,7 +60,6 @@ const studentincoursesTable = ({ studentInCourses, onDeleteClick }) => {
         </tbody>
       </table>
       <ToastContainer />
-
     </div>
   );
 };

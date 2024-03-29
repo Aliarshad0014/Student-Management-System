@@ -1,5 +1,7 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import 'react-toastify/dist/ReactToastify.css';
 import Footer from './components/footer';
 import Header from './components/header';
 import Landingpage from "./pages/Landingpage"
@@ -13,7 +15,6 @@ import StudentProfile from './pages/Studentprofile';
 import StaffProfile from './pages/Staffprofile';
 import AdminPage from './pages/admin';
 import Register from './pages/Register';
-import { useState, useEffect } from 'react';
 import AddCourses from './pages/addCourses';
 import AddDepartments from './pages/addDepartments';
 import AddPrograms from './pages/addProgram';
@@ -33,17 +34,67 @@ import AllPrograms from './pages/AllPrograms';
 import AllStudents from './pages/AllStudents';
 import AllCourses from './pages/AllCourses';
 
-function App() {
+function App() { 
+  
   const [studentInCourses, setstudentInCourses] = useState([]);
   const [courses, setCourses] = useState([]);
   const [departments, setDepartments] = useState([]);
-  const [documents, setDocuments] = useState([]);
   const [programs, setPrograms] = useState([]);
   const [staff, setStaff] = useState([]);
   const [students, setStudents] = useState([]);
   const [fee, setFee] = useState([]);
   const [salary, setSalary] = useState([]);
 
+  const [lastActivity, setLastActivity] = useState(Date.now());
+  const [isLoggedIn, setIsLoggedIn] = useState(() => {
+    // Get login status from localStorage, default to false if not found
+    return localStorage.getItem('isLoggedIn') === 'true';
+  });
+
+  // Update last activity timestamp on user interaction
+  const handleUserActivity = () => {
+    setLastActivity(Date.now());
+  };
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      const currentTime = Date.now();
+      const inactiveDuration = currentTime - lastActivity;
+      const fifteenMinutes = 15 * 60 * 1000; // 15 minutes in milliseconds
+
+      if (inactiveDuration >= fifteenMinutes && isLoggedIn) {
+        // Perform logout action
+        setIsLoggedIn(false);
+        localStorage.setItem('isLoggedIn', 'false'); // Update localStorage
+      }
+    }, 60000); // Check every Minute
+
+    return () => clearInterval(intervalId);
+  }, [lastActivity, isLoggedIn]);
+
+  useEffect(() => {
+    const unlisten = () => {
+      // Update activity timestamp on user interaction
+      window.addEventListener('mousemove', handleUserActivity);
+      window.addEventListener('keydown', handleUserActivity);
+    };
+
+    unlisten();
+
+    return () => {
+      // Clean up event listeners
+      window.removeEventListener('mousemove', handleUserActivity);
+      window.removeEventListener('keydown', handleUserActivity);
+    };
+  }, []);
+
+  // Redirect to login page if not logged in
+  useEffect(() => {     
+    const pathname = window.location.pathname;     
+    if (pathname !== '/login' && !isLoggedIn) {       
+      window.location.replace('/login');     
+    }   
+  }, [isLoggedIn]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -220,15 +271,16 @@ function App() {
     };
     fetchData();
   }, []);
+  
 
   return (
     <Router>
       <div className='App'>
-        <Header />
-        <div className="App-body">
+      {isLoggedIn && <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />}
+       <div className="App-body">
           <Routes>
+            <Route path="/login" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} /> 
             <Route path="/" element={<Landingpage />} />
-            <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/departments" element={<Departments departments={departments} />} />
             <Route path="/programs/:department_id" element={<Programs programs={programs} />} />
@@ -238,9 +290,9 @@ function App() {
             <Route path="/student-management/:course_id" element={<StudentManagement students={students} studentInCourses={studentInCourses}/>} />
             <Route path="/student-management/" element={<AllStudents students={students}/>} />
             <Route path="/staff-management" element={<StaffManagement staff={staff} />} />
-            <Route path="/student-profile/:id" element={<StudentProfile fee={fee} documents={documents}/>} />
-            <Route path="/staff-profile/:id" element={<StaffProfile staff={staff} salary={salary} documents={documents}/>} />
-            <Route path="/admin" element={<AdminPage courses={courses} departments={departments} documents={documents} programs={programs} staff={staff} students={students} fee={fee} salary={salary} studentInCourses={studentInCourses}/>} />
+            <Route path="/student-profile/:id" element={<StudentProfile fee={fee}/>} />
+            <Route path="/staff-profile/:id" element={<StaffProfile staff={staff} salary={salary}/>} />
+            <Route path="/admin" element={<AdminPage courses={courses} departments={departments} programs={programs} staff={staff} students={students} fee={fee} salary={salary} studentInCourses={studentInCourses}/>} />
             <Route path="/update-course/:id" element={<UpdateCourse />} />
             <Route path="/update-department/:id" element={<UpdateDepartment />} />
             <Route path="/update-program/:id" element={<UpdateProgram />} />
@@ -258,7 +310,8 @@ function App() {
             <Route path="/add-studentincourses" element={<Addstudentincourses/>} />
           </Routes>
         </div>
-        <Footer />
+
+        {isLoggedIn && <Footer />}
       </div>
     </Router>
   );

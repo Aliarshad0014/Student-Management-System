@@ -1,11 +1,20 @@
 import React from 'react';
 
-function Header() {
+function Header({ isLoggedIn, setIsLoggedIn }) {
     const headerStyle = {
         backgroundColor: 'white',
         position: 'relative',
         width: '100%',
         zIndex: 10,
+    };
+
+    const handleLogout = () => {
+        // Set isLoggedIn state to false
+        setIsLoggedIn(false);
+        // Clear the isLoggedIn flag from localStorage
+        localStorage.removeItem('isLoggedIn');
+        // Redirect the user to the login page
+        window.location.replace('/login');
     };
 
     return (
@@ -37,16 +46,21 @@ function Header() {
                             </a>
                         </li>
                         <li>
-                            <a href="/admin" className="hover:text-red-800 ease-in-out duration-300 text-red-500 inline-block transform transition-transform hover:scale-110">
+                            <a href="/admin" className="hover:text-red-600 ease-in-out duration-300 text-purple-700">
                                 Admin
                             </a>
                         </li>
+                        {/* Render logout button only if isLoggedIn is true */}
                     </ul>
                 </nav>
+                {isLoggedIn && (
+                    <button onClick={handleLogout} className="bg-gradient-to-b rounded-sm text-black from-red-600 to-red-600 p-2 px-6 hover:from-red-700 hover:to-red-700 hover:scale-105 transition-all ease-in-out duration-300 w-28 hover:text-white">
+                        Logout
+                    </button>
+                )}
             </div>
         </header>
     );
 }
 
 export default Header;
-

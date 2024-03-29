@@ -12,8 +12,13 @@ const Courses = ({ courses }) => {
   };
 
   console.log("courses" + JSON.stringify(courses));
+  
+  const filteredCourses = courses.filter(course => 
+    course.program_id === programIdNumber && 
+    course.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  
 
-  const filteredCourses = courses.filter(course => course.program_id === programIdNumber);
 
   console.log("filteredcourses" + JSON.stringify(filteredCourses));
 

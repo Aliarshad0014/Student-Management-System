@@ -37,7 +37,6 @@ const AllCourses = ({courses}) => {
                 className="block p-4 mb-2 bg-white rounded-md cursor-pointer shadow-md hover:bg-red-50 transition duration-300 ease-in-out"
               >
                 <h3 className="text-lg font-semibold mb-2"> {course.course_id} - {course.name}</h3>
-                <p>{course.description}</p>
               </Link>
             ))}
           </ul>
