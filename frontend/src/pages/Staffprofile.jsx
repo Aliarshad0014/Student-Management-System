@@ -41,7 +41,6 @@ const StaffProfile = () => {
           throw new Error('Failed to fetch staff data');
         }
         const data = await response.json();
-        console.log(data)
         setSalary(data);
       } catch (error) {
         console.error('Error fetching staff data:', error.message);

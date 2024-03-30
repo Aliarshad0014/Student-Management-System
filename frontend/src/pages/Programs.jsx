@@ -5,14 +5,9 @@ const Programs = ({ programs }) => {
   const { department_id } = useParams();
 
   const departmentIdNumber = parseInt(department_id, 10);
-  
-  console.log("department_id", department_id);
-  console.log("Programs", programs);
 
   // Filter programs based on department_id
   const filteredPrograms = programs.filter(program => program.department_id === departmentIdNumber);
-
-  console.log("filteredPrograms", filteredPrograms);
   
   return (
     <div className="flex flex-col h-screen">

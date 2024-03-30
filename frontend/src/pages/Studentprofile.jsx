@@ -19,7 +19,6 @@ const StudentProfile = () => {
           throw new Error('Failed to fetch student data');
         }
         const data = await response.json();
-        console.log("Student data:", data);
         setStudent(data);
       } catch (error) {
         console.error('Error fetching student data:', error.message);

@@ -10,18 +10,11 @@ const Courses = ({ courses }) => {
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
-
-  console.log("courses" + JSON.stringify(courses));
   
   const filteredCourses = courses.filter(course => 
     course.program_id === programIdNumber && 
     course.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
-  
-
-
-  console.log("filteredcourses" + JSON.stringify(filteredCourses));
-
 
   return (
     <div className="flex flex-col min-h-screen">

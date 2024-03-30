@@ -109,7 +109,6 @@ function App() {
         }
         const data = await response.json();
         setstudentInCourses(data);
-        console.log(data)
       } catch (error) {
         console.error('Error fetching student in studentincourses data:', error.message);
       }
@@ -131,7 +130,6 @@ function App() {
         }
         const data = await response.json();
         setCourses(data);
-        console.log(data)
       } catch (error) {
         console.error('Error fetching student in courses data:', error.message);
       }
@@ -153,7 +151,6 @@ function App() {
         }
         const data = await response.json();
         setDepartments(data);
-        console.log(data)
       } catch (error) {
         console.error('Error fetching student in department data:', error.message);
       }
@@ -175,7 +172,6 @@ function App() {
         }
         const data = await response.json();
         setPrograms(data);
-        console.log(data)
       } catch (error) {
         console.error('Error fetching student in program data:', error.message);
       }
@@ -197,7 +193,6 @@ function App() {
         }
         const data = await response.json();
         setStaff(data);
-        console.log(data)
       } catch (error) {
         console.error('Error fetching student in staff data:', error.message);
       }
@@ -219,7 +214,6 @@ function App() {
         }
         const data = await response.json();
         setStudents(data);
-        console.log(data)
       } catch (error) {
         console.error('Error fetching student in student data:', error.message);
       }
@@ -241,7 +235,6 @@ function App() {
         }
         const data = await response.json();
         setSalary(data);
-        console.log(data)
       } catch (error) {
         console.error('Error fetching student in salary data:', error.message);
       }
@@ -263,7 +256,6 @@ function App() {
         }
         const data = await response.json();
         setFee(data);
-        console.log(data)
       } catch (error) {
         console.error('Error fetching student in fee data:', error.message);
       }
