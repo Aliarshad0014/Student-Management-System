@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { RiEyeCloseLine, RiEyeFill } from "react-icons/ri";
 
-const Login = ({isLoggedIn, setIsLoggedIn}) => {
+const Login = ({setIsLoggedIn}) => {
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate(); 
 
   const handleSubmit = (e) => {
@@ -16,7 +18,7 @@ const Login = ({isLoggedIn, setIsLoggedIn}) => {
       localStorage.setItem('isLoggedIn', 'true');
       // Password is correct, navigate to the Landing Page
       navigate('/');
-        } else {
+    } else {
       toast.error('Incorrect Password');        
     }
   };
@@ -31,18 +33,25 @@ const Login = ({isLoggedIn, setIsLoggedIn}) => {
         <div className="p-8 max-w-md w-full bg-gray-100 rounded-md">
           <h2 className="text-3xl font-semibold mb-4">Login</h2>
           <form onSubmit={handleSubmit}>
-            <div className="mb-4">
+            <div className="mb-4 relative">
               <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">
                 Password
               </label>
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full p-2 border rounded-md"
+                className="w-full p-2 border rounded-md pr-10"
                 placeholder="Enter your password"
               />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute inset-y-12 right-0 flex items-center px-2 focus:outline-none"
+              >
+                {showPassword ? <  RiEyeFill /> : <RiEyeCloseLine /> }
+              </button>
             </div>
             <button
               type="submit"
@@ -52,7 +61,6 @@ const Login = ({isLoggedIn, setIsLoggedIn}) => {
             </button>
           </form>
           <ToastContainer />
-
         </div>
       </div>
     </div>
@@ -60,4 +68,3 @@ const Login = ({isLoggedIn, setIsLoggedIn}) => {
 };
 
 export default Login;
-

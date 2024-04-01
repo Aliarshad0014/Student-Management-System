@@ -1,4 +1,5 @@
 import React from 'react';
+import { MdLogout } from "react-icons/md";
 
 function Header({ isLoggedIn, setIsLoggedIn }) {
     const headerStyle = {
@@ -54,8 +55,9 @@ function Header({ isLoggedIn, setIsLoggedIn }) {
                     </ul>
                 </nav>
                 {isLoggedIn && (
-                    <button onClick={handleLogout} className="bg-gradient-to-b rounded-sm text-black from-red-600 to-red-600 p-2 px-6 hover:from-red-700 hover:to-red-700 hover:scale-105 transition-all ease-in-out duration-300 w-28 hover:text-white">
+                    <button onClick={handleLogout} className="bg-gradient-to-b rounded-sm text-black hover:text-white from-red-600 to-red-600 p-2 px-6 hover:from-red-700 hover:to-red-700 hover:scale-105 transition-all ease-in-out duration-300 flex items-center">
                         Logout
+                        <MdLogout className="ml-2" />
                     </button>
                 )}
             </div>
@@ -64,3 +66,4 @@ function Header({ isLoggedIn, setIsLoggedIn }) {
 }
 
 export default Header;
+
