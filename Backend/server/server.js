@@ -23,7 +23,6 @@ app.use(cors(corsOptions));
 
 app.use(express.json());
 
-//  router paths starting with "/api/xroute"
 app.use("/api/course", courseRouter);
 app.use("/api/department", departmentRouter);
 app.use("/api/program", programRouter);
