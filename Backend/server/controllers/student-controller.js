@@ -120,11 +120,12 @@ const studentHandleUpdate = async (req, res) => {
         }
         const existingStudent = await Student.findOne({ student_id });
 
+        
+        // Check if the student with the given ID exists
         if (!existingStudent) {
             return res.status(404).send('Student with the given ID not found');
         }
 
-        // Check if the student with the given ID exists
 
         // Update student with the provided data
         const updatedStudent = await Student.findOneAndUpdate(
