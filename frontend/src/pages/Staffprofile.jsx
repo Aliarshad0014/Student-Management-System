@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom';
 const StaffProfile = () => {
   const [staff, setStaffData] = useState([]);
   const [salaries, setSalary] = useState({});
-
   const { id } = useParams(); // Get the ID from the URL params
 
   useEffect(() => {

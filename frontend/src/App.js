@@ -300,7 +300,6 @@ function App() {
             <Route path="/add-studentincourses" element={<Addstudentincourses/>} />
           </Routes>
         </div>
-
         {isLoggedIn && <Footer />}
       </div>
     </Router>
