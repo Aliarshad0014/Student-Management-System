@@ -31,7 +31,6 @@ const Courses = ({ courses }) => {
             className="p-2 border border-gray-300 rounded-md w-48"
           />
         </div>
-        
         {/* List of Courses */}
         <div className="overflow-y-auto max-h-[500px]">
           <ul className="text-left">
