@@ -40,3 +40,5 @@ connectDb().then(() => {
         console.log(`Server running at: http://localhost:${PORT}`);
     });
 });
+
+module.exports = app

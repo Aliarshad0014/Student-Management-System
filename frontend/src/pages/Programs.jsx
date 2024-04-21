@@ -10,7 +10,7 @@ const Programs = ({ programs }) => {
   const filteredPrograms = programs.filter(program => program.department_id === departmentIdNumber);
   
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col min-h-screen">
       <main className="p-4 lg:ml-32 lg:mr-32">
         <h2 className="text-2xl font-bold mb-4 mt-4 text-red-900 text-left">Programs</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
