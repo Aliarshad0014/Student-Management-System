@@ -14,7 +14,7 @@ const salaryRouter = require("./routers/salary-router");
 const connectDb = require("./utils/db");
 
 const corsOptions ={
-    origin:"http://localhost:3000",
+    origin:["http://localhost:3000", "http://localhost:3001"],
     methods: "GET,POST,PUT,DELETE,PATCH,HEAD",
     credentials: true,
 }
